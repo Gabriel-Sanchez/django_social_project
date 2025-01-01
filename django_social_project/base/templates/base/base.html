@@ -2,27 +2,83 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width">
     <title>social_project | {% block title %}{% endblock title %}</title>
     {% load static %}
 
-    {% block scripts %}
-    {% endblock scripts %}
-
     {% block head %}
     {% endblock head %}
+    <link rel="stylesheet" href="{% static 'django_social_project/css/base.css' %}">
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
 
-    <nav>
-        navbar
-    </nav>
+
+    <body class="relative h-full w-full">
+		<div class="absolute bottom-0  right-0 top-[-10%] h-[500px] w-[500px] rounded-full bg-[radial-gradient(circle_farthest-side,rgba(255,0,182,.15),rgba(255,255,255,0))]"></div>
+        <div class="absolute bottom-0  top-[-10%] h-[500px] w-[500px] rounded-full bg-[radial-gradient(circle_farthest-side,rgba(255,0,182,.15),rgba(255,255,255,0))]"></div>
+		<div class="relative w-full">
+			
+			 <section class="top_image pt-8 " >
+
+
+                <header class="fixed top-0 left-0 w-full z-50 bg-gradient-to-b from-transparent to-[rgba(250,250,245,0.03)] backdrop-blur-sm py-4">
+                    <div class="max-w-6xl mx-auto flex items-center justify-between px-4">
+                      <!-- Nombre de la Iglesia -->
+                      <div class="text-[#513b2a] font-bold text-xl tracking-wide">
+                        Iglesia Comunidad
+                      </div>
+                  
+                      <!-- Navegación -->
+                      <nav class="flex flex-row gap-6">
+                        <a 
+                          href="/home" 
+                          class="text-gray-800 font-medium hover:text-gray-900 hover:underline underline-offset-2 decoration-1 transition-colors duration-200"
+                        >
+                          INICIO
+                        </a>
+                        <a 
+                          href="#Contacto" 
+                          class="text-gray-800 font-medium hover:text-gray-900 hover:underline underline-offset-2 decoration-1 transition-colors duration-200"
+                        >
+                          CONTACTO
+                        </a>
+                        <a 
+                          href="#calendar" 
+                          class="text-gray-800 font-medium hover:text-gray-900 hover:underline underline-offset-2 decoration-1 transition-colors duration-200"
+                        >
+                          CALENDAR
+                        </a>
+                        <a 
+                          href="#about" 
+                          class="text-gray-800 font-medium hover:text-gray-900 hover:underline underline-offset-2 decoration-1 transition-colors duration-200"
+                        >
+                          ABOUT
+                        </a>
+                      </nav>
+                    </div>
+                  </header>
+                  
+			 </section>
+
+          
+
+		  </div>
+		  
+		
+	
+	
+
+
 
     {% block content %}
 
 
     {% endblock %}
+    {% block scripts %}
+    {% endblock scripts %}
     {% block scripts_footer %}
     {% endblock scripts_footer %}
+
+
 </body>
 </html>
