@@ -31,7 +31,7 @@
                       <!-- Navegación -->
                       <nav class="flex flex-row gap-6">
                         <a 
-                          href="/home" 
+                          href="{% url 'home' %}" 
                           class="text-gray-800 font-medium hover:text-gray-900 hover:underline underline-offset-2 decoration-1 transition-colors duration-200"
                         >
                           INICIO
@@ -43,10 +43,10 @@
                           CONTACTO
                         </a>
                         <a 
-                          href="#calendar" 
+                          href="{% url 'events' %}" 
                           class="text-gray-800 font-medium hover:text-gray-900 hover:underline underline-offset-2 decoration-1 transition-colors duration-200"
                         >
-                          CALENDAR
+                          EVENTOS
                         </a>
                         <a 
                           href="#about" 

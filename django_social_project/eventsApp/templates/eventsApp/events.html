@@ -1,0 +1,36 @@
+{% extends "base/base.html" %}
+{% load static %}
+
+{% block title %}
+Home
+{% endblock title %}
+
+{% block content %}
+
+
+
+<header class="bg-[rgb(249, 230, 188)] text-black p-4">
+    <h1 class="text-center text-3xl font-bold">Eventos</h1>
+</header>
+
+<main class="container mx-auto py-8">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {% for evento in eventos %}
+            <div class="p-4 bg-white rounded-lg shadow-md">
+                <h2 class="text-xl font-bold">{{ evento.titulo }}</h2>
+                <p class="text-gray-600">{{ evento.fecha|date:"d M Y H:i" }}</p>
+                <p class="mt-2">{{ evento.lugar }}</p>
+                <p class="mt-2 text-sm text-gray-700">{{ evento.descripcion }}</p>
+            </div>
+        {% empty %}
+            <p class="text-center col-span-full">No hay eventos próximos.</p>
+        {% endfor %}
+    </div>
+</main>
+
+{% endblock %}
+
+{% block scripts_footer %}
+
+
+{% endblock scripts_footer %}
