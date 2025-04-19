@@ -14,6 +14,7 @@ media
 variables_entorno.sh
 staticfiles
 static
+scripts/
 
 # Backup files # 
 *.bak 
