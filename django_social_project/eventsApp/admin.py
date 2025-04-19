@@ -1,10 +1,17 @@
 from django.contrib import admin
 
 # Register your models here.
-from .models import Evento
+from .models import Evento, TeamMember
 
 @admin.register(Evento)
 class EventoAdmin(admin.ModelAdmin):
-    list_display = ('titulo', 'fecha', 'lugar', 'creado_en')
+    list_display = ('titulo', 'fecha', 'lugar')
     list_filter = ('fecha',)
-    search_fields = ('titulo', 'descripcion', 'lugar')
+    search_fields = ('titulo', 'lugar', 'descripcion')
+
+@admin.register(TeamMember)
+class TeamMemberAdmin(admin.ModelAdmin):
+    list_display = ('nombre', 'rol', 'orden', 'activo')
+    list_filter = ('rol', 'activo')
+    search_fields = ('nombre', 'descripcion')
+    list_editable = ('orden', 'activo')

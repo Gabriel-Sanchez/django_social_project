@@ -4,7 +4,10 @@ from django.http import JsonResponse
 # Create your views here.
 
 
-from .models import Evento
+from .models import Evento, TeamMember
+
+def home(request):
+    return render(request, 'eventsApp/home.html')
 
 def events(request):
     # Obtener todos los eventos, ordenados por fecha descendente
@@ -16,7 +19,7 @@ def events(request):
     }
     return render(request, 'eventsApp/events.html', context)
 
-def get_calendar_events(request):
+def calendar_events(request):
     eventos = Evento.objects.all()
     events_list = []
     for evento in eventos:
@@ -27,3 +30,16 @@ def get_calendar_events(request):
             'location': evento.lugar,
         })
     return JsonResponse(events_list, safe=False)
+
+def informacion_general(request):
+    # Obtener miembros del equipo por categoría
+    sacerdotes = TeamMember.objects.filter(rol='sacerdote', activo=True)
+    diaconos = TeamMember.objects.filter(rol='diacono', activo=True)
+    administrativos = TeamMember.objects.filter(rol='administrativo', activo=True)
+    
+    context = {
+        'sacerdotes': sacerdotes,
+        'diaconos': diaconos,
+        'administrativos': administrativos,
+    }
+    return render(request, 'eventsApp/informacion_general.html', context)

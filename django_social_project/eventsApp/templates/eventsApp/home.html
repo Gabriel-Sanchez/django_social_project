@@ -1,0 +1,51 @@
+{% extends "base/base.html" %}
+{% load static %}
+
+{% block title %}
+Inicio
+{% endblock title %}
+
+{% block content %}
+<header class="bg-[rgb(249, 230, 188)] text-black p-4">
+    <h1 class="text-center text-3xl font-bold">Bienvenidos a la Parroquia Santuario Nacional del Corazón de María</h1>
+</header>
+
+<main class="container mx-auto py-8 px-4">
+    <div class="max-w-4xl mx-auto">
+        <section class="mb-12 text-center">
+            <h2 class="text-2xl font-bold mb-4 text-[#513b2a]">Nuestra Comunidad</h2>
+            <p class="text-gray-700 leading-relaxed">
+                Bienvenidos a nuestra comunidad parroquial. Un lugar de encuentro, oración y servicio 
+                donde todos están invitados a participar y crecer en la fe.
+            </p>
+        </section>
+
+        <section class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+            <div class="bg-white p-6 rounded-lg shadow-md">
+                <h3 class="text-xl font-semibold mb-3 text-[#513b2a]">Horarios de Misa</h3>
+                <ul class="space-y-2 text-gray-700">
+                    <li>Lunes a Viernes: 7:00 AM y 6:00 PM</li>
+                    <li>Sábados: 7:00 AM y 6:00 PM</li>
+                    <li>Domingos: 7:00 AM, 9:00 AM, 11:00 AM, 6:00 PM</li>
+                </ul>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg shadow-md">
+                <h3 class="text-xl font-semibold mb-3 text-[#513b2a]">Servicios Parroquiales</h3>
+                <ul class="space-y-2 text-gray-700">
+                    <li>Confesiones</li>
+                    <li>Catequesis</li>
+                    <li>Grupos de Oración</li>
+                    <li>Atención Pastoral</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="text-center">
+            <a href="{% url 'events' %}" class="inline-block bg-[#513b2a] text-white px-6 py-3 rounded-lg hover:bg-[#3a2a1e] transition-colors duration-200">
+                Ver Eventos
+            </a>
+        </section>
+    </div>
+</main>
+{% endblock content %} 

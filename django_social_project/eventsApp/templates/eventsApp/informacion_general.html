@@ -1,0 +1,128 @@
+{% extends "base/base.html" %}
+{% load static %}
+
+{% block title %}
+Información General
+{% endblock title %}
+
+{% block content %}
+<header class="bg-[rgb(249, 230, 188)] text-black p-4">
+    <h1 class="text-center text-3xl font-bold">Información General</h1>
+</header>
+
+<main class="container mx-auto py-8 px-4">
+    <!-- Historia -->
+    <section class="mb-12">
+        <h2 class="text-2xl font-bold mb-4 text-[#513b2a]">Historia de la Parroquia</h2>
+        <div class="bg-white p-6 rounded-lg shadow-md">
+            <p class="text-gray-700 leading-relaxed">
+                [Aquí va la historia de la parroquia. Este texto deberá ser editado directamente en el template o 
+                puede ser movido a un modelo si se desea hacer editable desde el admin.]
+            </p>
+        </div>
+    </section>
+
+    <!-- Misión, Visión y Valores -->
+    <section class="mb-12">
+        <h2 class="text-2xl font-bold mb-4 text-[#513b2a]">Misión, Visión y Valores</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="bg-white p-6 rounded-lg shadow-md">
+                <h3 class="text-xl font-semibold mb-3 text-[#513b2a]">Misión</h3>
+                <p class="text-gray-700">
+                    [Descripción de la misión de la parroquia]
+                </p>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-md">
+                <h3 class="text-xl font-semibold mb-3 text-[#513b2a]">Visión</h3>
+                <p class="text-gray-700">
+                    [Descripción de la visión de la parroquia]
+                </p>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-md">
+                <h3 class="text-xl font-semibold mb-3 text-[#513b2a]">Valores</h3>
+                <ul class="list-disc list-inside text-gray-700">
+                    <li>Valor 1</li>
+                    <li>Valor 2</li>
+                    <li>Valor 3</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ubicación -->
+    <section class="mb-12">
+        <h2 class="text-2xl font-bold mb-4 text-[#513b2a]">Ubicación</h2>
+        <div class="bg-white p-6 rounded-lg shadow-md">
+            <div class="aspect-w-16 aspect-h-9 mb-4">
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3901.965315416283!2d-77.036743!3d-12.046374!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTLCsDAyJzQ3LjAiUyA3N8KwMDInMTIuMyJX!5e0!3m2!1ses!2spe!4v1234567890"
+                    width="100%" 
+                    height="450" 
+                    style="border:0;" 
+                    allowfullscreen="" 
+                    loading="lazy">
+                </iframe>
+            </div>
+            <p class="text-gray-700">
+                [Dirección completa de la parroquia]
+            </p>
+        </div>
+    </section>
+
+    <!-- Equipo Pastoral -->
+    <section class="mb-12">
+        <h2 class="text-2xl font-bold mb-4 text-[#513b2a]">Equipo Pastoral</h2>
+        
+        <!-- Sacerdotes -->
+        <div class="mb-8">
+            <h3 class="text-xl font-semibold mb-4 text-[#513b2a]">Sacerdotes</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {% for miembro in sacerdotes %}
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    {% if miembro.imagen %}
+                    <img src="{{ miembro.imagen.url }}" alt="{{ miembro.nombre }}" class="w-full h-48 object-cover rounded-lg mb-4">
+                    {% endif %}
+                    <h4 class="text-lg font-semibold mb-2">{{ miembro.nombre }}</h4>
+                    <p class="text-gray-600 mb-2">{{ miembro.get_rol_display }}</p>
+                    <p class="text-gray-700">{{ miembro.descripcion }}</p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Diáconos -->
+        <div class="mb-8">
+            <h3 class="text-xl font-semibold mb-4 text-[#513b2a]">Diáconos</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {% for miembro in diaconos %}
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    {% if miembro.imagen %}
+                    <img src="{{ miembro.imagen.url }}" alt="{{ miembro.nombre }}" class="w-full h-48 object-cover rounded-lg mb-4">
+                    {% endif %}
+                    <h4 class="text-lg font-semibold mb-2">{{ miembro.nombre }}</h4>
+                    <p class="text-gray-600 mb-2">{{ miembro.get_rol_display }}</p>
+                    <p class="text-gray-700">{{ miembro.descripcion }}</p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Personal Administrativo -->
+        <div class="mb-8">
+            <h3 class="text-xl font-semibold mb-4 text-[#513b2a]">Personal Administrativo</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {% for miembro in administrativos %}
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    {% if miembro.imagen %}
+                    <img src="{{ miembro.imagen.url }}" alt="{{ miembro.nombre }}" class="w-full h-48 object-cover rounded-lg mb-4">
+                    {% endif %}
+                    <h4 class="text-lg font-semibold mb-2">{{ miembro.nombre }}</h4>
+                    <p class="text-gray-600 mb-2">{{ miembro.get_rol_display }}</p>
+                    <p class="text-gray-700">{{ miembro.descripcion }}</p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+</main>
+{% endblock content %} 
