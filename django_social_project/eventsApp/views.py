@@ -4,10 +4,11 @@ from django.http import JsonResponse
 # Create your views here.
 
 
-from .models import Evento, TeamMember
+from .models import Evento, TeamMember, Servicio
 
 def home(request):
-    return render(request, 'eventsApp/home.html')
+    servicios = Servicio.objects.filter(activo=True)
+    return render(request, 'eventsApp/home.html', {'servicios': servicios})
 
 def events(request):
     # Obtener todos los eventos, ordenados por fecha descendente
@@ -43,3 +44,7 @@ def informacion_general(request):
         'administrativos': administrativos,
     }
     return render(request, 'eventsApp/informacion_general.html', context)
+
+def servicios(request):
+    servicios_list = Servicio.objects.filter(activo=True)
+    return render(request, 'eventsApp/servicios.html', {'servicios': servicios_list})

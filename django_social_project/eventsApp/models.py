@@ -30,3 +30,20 @@ class TeamMember(models.Model):
 
     def __str__(self):
         return f"{self.nombre} - {self.get_rol_display()}"
+
+class Servicio(models.Model):
+    nombre = models.CharField(max_length=200)
+    descripcion = models.TextField()
+    requisitos = models.TextField()
+    horario = models.CharField(max_length=200, blank=True)
+    contacto = models.CharField(max_length=200, blank=True)
+    orden = models.IntegerField(default=0)
+    activo = models.BooleanField(default=True)
+
+    class Meta:
+        ordering = ['orden']
+        verbose_name = 'Servicio'
+        verbose_name_plural = 'Servicios'
+
+    def __str__(self):
+        return self.nombre
