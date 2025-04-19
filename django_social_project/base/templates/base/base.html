@@ -10,73 +10,117 @@
     {% endblock head %}
     <link rel="stylesheet" href="{% static 'django_social_project/css/base.css' %}">
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Estilos específicos que usan las variables CSS */
+        .nav-link {
+            @apply font-medium underline-offset-2 decoration-1;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, 
+                var(--blue-light), 
+                var(--primary-white));
+            opacity: 0.97;
+        }
+    </style>
 </head>
 
+<body class="relative h-full w-full">
+    <!-- Gradientes decorativos con las nuevas variables -->
+    <div class="absolute bottom-0 right-0 top-[-10%] h-[500px] w-[500px] rounded-full gradient-overlay"></div>
+    <div class="absolute bottom-0 left-0 top-[-10%] h-[500px] w-[500px] rounded-full" 
+         style="background: radial-gradient(circle farthest-side, var(--red-light), transparent)">
+    </div>
 
-    <body class="relative h-full w-full">
-		<div class="absolute bottom-0  right-0 top-[-10%] h-[500px] w-[500px] rounded-full bg-[radial-gradient(circle_farthest-side,rgba(255,0,182,.15),rgba(255,255,255,0))]"></div>
-        <div class="absolute bottom-0  top-[-10%] h-[500px] w-[500px] rounded-full bg-[radial-gradient(circle_farthest-side,rgba(255,0,182,.15),rgba(255,255,255,0))]"></div>
-		<div class="relative w-full">
-			
-			 <section class="top_image pt-8 " >
-
-
-                <header class="fixed top-0 left-0 w-full z-50 bg-gradient-to-b from-transparent to-[rgba(250,250,245,0.03)] backdrop-blur-sm py-4">
-                    <div class="max-w-6xl mx-auto flex items-center justify-between px-4">
-                      <!-- Logo y Nombre de la Iglesia -->
-                      <div class="flex items-center space-x-3">
-                        <div class="w-36 h-36">
-                          <img src="/media/assets/logo_procladepan.png" alt="Logo PROCLADEPAN" class="w-full h-full object-contain">
+    <div class="relative w-full">
+        <section class="top_image pt-8">
+            <header class="site-header fixed top-0 left-0 w-full z-50 gradient-bg backdrop-blur-sm">
+                <div class="max-w-6xl mx-auto flex items-center justify-between px-4">
+                    <!-- Logo y Nombre de la Fundación -->
+                    <div class="flex items-center space-x-3">
+                        <div class="logo-container">
+                            <img src="/media/assets/logo_procladepan.png" alt="Logo PROCLADEPAN" class="w-full h-full object-contain">
                         </div>
-                        <div class="text-[#513b2a] font-bold text-xl tracking-wide">
-                          PROCLADEPAN<br>
-                          <span class="text-lg">Fundación</span>
+                        <div class="site-title title-primary tracking-wide">
+                            PROCLADEPAN<br>
+                            <span class="title-secondary">Fundación</span>
                         </div>
-                      </div>
-                  
-                      <!-- Navegación -->
-                      <nav class="flex flex-row gap-6">
-                        <a href="{% url 'home' %}"
-                            class="text-gray-800 font-medium hover:text-gray-900 hover:underline underline-offset-2 decoration-1 transition-colors duration-200">
-                            INICIO
-                        </a>
-                        <a href="{% url 'events' %}"
-                            class="text-gray-800 font-medium hover:text-gray-900 hover:underline underline-offset-2 decoration-1 transition-colors duration-200">
-                            EVENTOS
-                        </a>
-                        <a href="{% url 'informacion_general' %}"
-                            class="text-gray-800 font-medium hover:text-gray-900 hover:underline underline-offset-2 decoration-1 transition-colors duration-200">
-                            INFORMACIÓN
-                        </a>
-                        <a href="{% url 'contacto' %}"
-                            class="text-gray-800 font-medium hover:text-gray-900 hover:underline underline-offset-2 decoration-1 transition-colors duration-200">
-                            CONTACTO
-                        </a>
-                      </nav>
                     </div>
-                  </header>
-                  
-			 </section>
 
-          
+                    <!-- Navegación Desktop -->
+                    <nav class="nav-menu hidden md:flex flex-row gap-6">
+                        <a href="{% url 'home' %}" class="nav-link">INICIO</a>
+                        <a href="{% url 'events' %}" class="nav-link">EVENTOS</a>
+                        <a href="{% url 'informacion_general' %}" class="nav-link">INFORMACIÓN</a>
+                        <a href="{% url 'contacto' %}" class="nav-link">CONTACTO</a>
+                    </nav>
 
-		  </div>
-		  
-		
-	
-	
+                    <!-- Botón menú móvil -->
+                    <button class="mobile-menu-button md:hidden" aria-label="Menú">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                        </svg>
+                    </button>
+                </div>
+            </header>
 
-
+            <!-- Menú móvil -->
+            <div class="mobile-menu md:hidden">
+                <a href="{% url 'home' %}" class="nav-link">INICIO</a>
+                <a href="{% url 'events' %}" class="nav-link">EVENTOS</a>
+                <a href="{% url 'informacion_general' %}" class="nav-link">INFORMACIÓN</a>
+                <a href="{% url 'contacto' %}" class="nav-link">CONTACTO</a>
+            </div>
+        </section>
+    </div>
 
     {% block content %}
-
-
     {% endblock %}
+
+    <!-- Scripts -->
+    <script>
+        // Función para manejar el scroll del header
+        function handleScroll() {
+            const header = document.querySelector('.site-header');
+            const scrolled = window.scrollY > 50;
+            header.classList.toggle('scrolled', scrolled);
+        }
+
+        // Función para manejar el menú móvil
+        function handleMobileMenu() {
+            const menuButton = document.querySelector('.mobile-menu-button');
+            const mobileMenu = document.querySelector('.mobile-menu');
+            
+            menuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('active');
+            });
+
+            // Cerrar menú al hacer click en un enlace
+            document.querySelectorAll('.mobile-menu .nav-link').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.remove('active');
+                });
+            });
+
+            // Cerrar menú al hacer click fuera
+            document.addEventListener('click', (e) => {
+                if (!menuButton.contains(e.target) && !mobileMenu.contains(e.target)) {
+                    mobileMenu.classList.remove('active');
+                }
+            });
+        }
+
+        // Inicializar funciones
+        document.addEventListener('DOMContentLoaded', () => {
+            window.addEventListener('scroll', handleScroll);
+            handleMobileMenu();
+            handleScroll(); // Llamada inicial para establecer el estado correcto
+        });
+    </script>
+
     {% block scripts %}
     {% endblock scripts %}
     {% block scripts_footer %}
     {% endblock scripts_footer %}
-
-
 </body>
 </html>
