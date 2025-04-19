@@ -1,20 +1,27 @@
 from django.shortcuts import render
 from django.http import JsonResponse
+from .models import Evento, TeamMember, Servicio
+from django.utils import timezone
+from datetime import timedelta
 
 # Create your views here.
 
-
-from .models import Evento, TeamMember, Servicio
+def get_upcoming_events(limit=3):
+    now = timezone.now()
+    return Evento.objects.filter(fecha__gte=now).order_by('fecha')[:limit]
 
 def home(request):
     servicios = Servicio.objects.filter(activo=True)
-    return render(request, 'eventsApp/home.html', {'servicios': servicios})
+    eventos_proximos = get_upcoming_events()
+    context = {
+        'servicios': servicios,
+        'eventos_proximos': eventos_proximos,
+        'is_home': True,  # Marcador para identificar la página principal
+    }
+    return render(request, 'eventsApp/home.html', context)
 
 def events(request):
-    # Obtener todos los eventos, ordenados por fecha descendente
     eventos = Evento.objects.all().order_by('-fecha')
-    
-    # Pasar los eventos al contexto de la plantilla
     context = {
         'eventos': eventos,
     }
@@ -33,7 +40,6 @@ def calendar_events(request):
     return JsonResponse(events_list, safe=False)
 
 def informacion_general(request):
-    # Obtener miembros del equipo por categoría
     sacerdotes = TeamMember.objects.filter(rol='sacerdote', activo=True)
     diaconos = TeamMember.objects.filter(rol='diacono', activo=True)
     administrativos = TeamMember.objects.filter(rol='administrativo', activo=True)
@@ -46,5 +52,20 @@ def informacion_general(request):
     return render(request, 'eventsApp/informacion_general.html', context)
 
 def servicios(request):
-    servicios_list = Servicio.objects.filter(activo=True)
-    return render(request, 'eventsApp/servicios.html', {'servicios': servicios_list})
+    servicios = Servicio.objects.filter(activo=True)
+    context = {
+        'servicios': servicios,
+    }
+    return render(request, 'eventsApp/servicios.html', context)
+
+def eventos_calendario_api(request):
+    eventos = Evento.objects.all()
+    data = []
+    for evento in eventos:
+        data.append({
+            'title': evento.titulo,
+            'start': evento.fecha.isoformat(),
+            'description': evento.descripcion,
+            'location': evento.lugar
+        })
+    return JsonResponse(data, safe=False)
