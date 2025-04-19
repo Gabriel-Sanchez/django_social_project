@@ -9,22 +9,24 @@ Eventos
 <link href="https://cdn.jsdelivr.net/npm/@fullcalendar/core/main.min.css" rel="stylesheet">
 <link href="https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid/main.min.css" rel="stylesheet">
 <style>
-    .event-tooltip {
-        position: absolute;
-        background: white;
-        border: 1px solid #ddd;
-        padding: 10px;
-        border-radius: 4px;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-        z-index: 1000;
-        display: none;
+    .fc { 
+        max-width: 1200px;
+        margin: 0 auto;
     }
     .fc-event {
         cursor: pointer;
     }
-    .fc { 
-        max-width: 1200px;
-        margin: 0 auto;
+    dialog {
+        padding: 0;
+        border: none;
+        border-radius: 0.75rem;
+        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        max-width: 500px;
+        width: 90%;
+    }
+    dialog::backdrop {
+        background: rgba(0, 0, 0, 0.6);
+        backdrop-filter: blur(4px);
     }
 </style>
 {% endblock extra_head %}
@@ -37,8 +39,34 @@ Eventos
 <main class="container mx-auto py-8">
     <div class="mb-8">
         <div id="calendar" class="bg-white p-4 rounded-lg shadow-md"></div>
-        <div id="eventTooltip" class="event-tooltip"></div>
     </div>
+
+    <!-- Dialog Modal -->
+    <dialog id="eventDialog">
+        <div class="relative">
+            <!-- Cabecera -->
+            <div class="bg-[rgb(249, 230, 188)] p-6 rounded-t-xl">
+                <h2 id="dialogTitle" class="text-2xl font-bold text-gray-800"></h2>
+            </div>
+            
+            <!-- Contenido -->
+            <div class="p-6">
+                <div id="dialogContent" class="space-y-4"></div>
+                
+                <!-- Botón de cerrar -->
+                <div class="mt-8 flex justify-end">
+                    <form method="dialog">
+                        <button class="bg-[rgb(249, 230, 188)] hover:bg-[rgb(244, 215, 147)] text-gray-800 font-semibold py-2 px-6 rounded-lg transition-colors duration-200 flex items-center">
+                            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                            </svg>
+                            Cerrar
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </dialog>
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {% for evento in eventos %}
@@ -60,8 +88,10 @@ Eventos
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     var calendarEl = document.getElementById('calendar');
-    var tooltip = document.getElementById('eventTooltip');
-    
+    var dialog = document.getElementById('eventDialog');
+    var dialogContent = document.getElementById('dialogContent');
+    var dialogTitle = document.getElementById('dialogTitle');
+
     var calendar = new FullCalendar.Calendar(calendarEl, {
         initialView: 'dayGridMonth',
         headerToolbar: {
@@ -71,28 +101,56 @@ document.addEventListener('DOMContentLoaded', function() {
         },
         locale: 'es',
         events: '/events/calendar-events/',
-        eventDidMount: function(info) {
-            info.el.addEventListener('mouseover', function() {
-                var event = info.event;
-                tooltip.style.display = 'block';
-                tooltip.innerHTML = `
-                    <h3 class="font-bold">${event.title}</h3>
-                    <p><strong>Lugar:</strong> ${event.extendedProps.location}</p>
-                    <p><strong>Descripción:</strong> ${event.extendedProps.description}</p>
-                `;
-                
-                var rect = info.el.getBoundingClientRect();
-                tooltip.style.top = (rect.bottom + window.scrollY + 5) + 'px';
-                tooltip.style.left = rect.left + 'px';
+        eventClick: function(info) {
+            // Formatear la fecha
+            var fecha = new Date(info.event.start).toLocaleDateString('es-ES', {
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
             });
-            
-            info.el.addEventListener('mouseout', function() {
-                tooltip.style.display = 'none';
-            });
+
+            // Establecer título
+            dialogTitle.textContent = info.event.title;
+
+            // Contenido del dialog
+            dialogContent.innerHTML = `
+                <div class="flex items-center text-gray-600">
+                    <svg class="w-5 h-5 mr-3 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                    </svg>
+                    <span class="font-medium">${fecha}</span>
+                </div>
+                <div class="flex items-center text-gray-600">
+                    <svg class="w-5 h-5 mr-3 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                    </svg>
+                    <span class="font-medium">${info.event.extendedProps.location}</span>
+                </div>
+                <div class="mt-6 p-4 bg-gray-50 rounded-lg">
+                    <p class="text-gray-700">${info.event.extendedProps.description}</p>
+                </div>
+            `;
+
+            // Mostrar dialog
+            dialog.showModal();
         }
     });
     
     calendar.render();
+
+    // Cerrar dialog al hacer click fuera
+    dialog.addEventListener('click', function(event) {
+        const rect = dialog.getBoundingClientRect();
+        const isInDialog = (rect.top <= event.clientY && event.clientY <= rect.top + rect.height &&
+            rect.left <= event.clientX && event.clientX <= rect.left + rect.width);
+        if (!isInDialog) {
+            dialog.close();
+        }
+    });
 });
 </script>
 {% endblock scripts_footer %}
