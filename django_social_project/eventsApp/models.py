@@ -53,3 +53,20 @@ class Servicio(models.Model):
 
     def __str__(self):
         return self.nombre
+
+class CarouselImage(models.Model):
+    titulo = models.CharField(max_length=100, help_text="Título que aparecerá sobre la imagen")
+    subtitulo = models.CharField(max_length=200, help_text="Subtítulo o descripción corta")
+    imagen = models.ImageField(upload_to='carousel/', help_text="Imagen para el carrusel (recomendado: 1920x1080px)")
+    orden = models.IntegerField(default=0, help_text="Orden en que aparecerá la imagen (menor número = primero)")
+    activo = models.BooleanField(default=True, help_text="Determina si la imagen se muestra en el carrusel")
+    fecha_creacion = models.DateTimeField(auto_now_add=True)
+    fecha_actualizacion = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ['orden', '-fecha_creacion']
+        verbose_name = "Imagen del Carrusel"
+        verbose_name_plural = "Imágenes del Carrusel"
+
+    def __str__(self):
+        return self.titulo

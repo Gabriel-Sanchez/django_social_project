@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import JsonResponse
-from .models import Evento, TeamMember, Servicio
+from .models import Evento, TeamMember, Servicio, CarouselImage
 from django.utils import timezone
 from datetime import timedelta
 from django.core.paginator import Paginator
@@ -12,12 +12,21 @@ def get_upcoming_events(limit=3):
     return Evento.objects.filter(fecha__gte=now).order_by('fecha')[:limit]
 
 def home(request):
-    servicios = Servicio.objects.filter(activo=True)
-    eventos_proximos = get_upcoming_events()
+    # Get active carousel images
+    carousel_images = CarouselImage.objects.filter(activo=True)
+    
+    # Get upcoming events (existing code)
+    eventos_proximos = Evento.objects.filter(
+        fecha__gte=timezone.now()
+    ).order_by('fecha')[:3]
+    
+    # Get active services (existing code)
+    servicios = Servicio.objects.filter(activo=True).order_by('orden')
+    
     context = {
-        'servicios': servicios,
+        'carousel_images': carousel_images,
         'eventos_proximos': eventos_proximos,
-        'is_home': True,  # Marcador para identificar la página principal
+        'servicios': servicios,
     }
     return render(request, 'eventsApp/home.html', context)
 

@@ -11,6 +11,43 @@ Inicio
 </header>
 
 <main class="container mx-auto py-8 px-4">
+    {% if carousel_images %}
+    <!-- Carousel Section -->
+    <div class="relative w-full max-w-4xl mx-auto mb-12 h-[400px] overflow-hidden rounded-lg shadow-lg">
+        <!-- Slides Container -->
+        <div id="slides-container" class="relative h-full touch-pan-y">
+            {% for image in carousel_images %}
+            <div class="slide absolute w-full h-full transition-transform duration-500 {% if forloop.first %}translate-x-0{% else %}translate-x-full{% endif %}" style="touch-action: pan-y pinch-zoom;">
+                <img src="{{ image.imagen.url }}" alt="{{ image.titulo }}" class="w-full h-full object-cover">
+                <div class="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 text-white p-4">
+                    <h3 class="text-xl font-semibold">{{ image.titulo }}</h3>
+                    <p>{{ image.subtitulo }}</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- Navigation Buttons - Always visible with hover effect -->
+        <button class="prev-slide absolute left-0 top-1/2 transform -translate-y-1/2 bg-black/30 hover:bg-black/60 text-white p-3 rounded-r transition-colors duration-200 backdrop-blur-sm">
+            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+            </svg>
+        </button>
+        <button class="next-slide absolute right-0 top-1/2 transform -translate-y-1/2 bg-black/30 hover:bg-black/60 text-white p-3 rounded-l transition-colors duration-200 backdrop-blur-sm">
+            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+            </svg>
+        </button>
+
+        <!-- Dots Navigation -->
+        <div class="absolute bottom-20 left-0 right-0 flex justify-center space-x-2">
+            {% for image in carousel_images %}
+            <button class="dot w-4 h-4 rounded-full bg-white/50 hover:bg-white/75 transition-all duration-200 {% if forloop.first %}!bg-white/90{% endif %}"></button>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+
     <div class="max-w-4xl mx-auto">
         <section class="mb-12 text-center">
             <h2 class="text-2xl font-bold mb-4 text-[var(--theme-brown)]">Nuestra Comunidad</h2>
@@ -98,4 +135,184 @@ Inicio
 </div>
 {% endif %}
 
-{% endblock content %} 
+{% endblock content %}
+
+{% block scripts_footer %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const slidesContainer = document.getElementById('slides-container');
+        const slides = document.querySelectorAll('.slide');
+        const dots = document.querySelectorAll('.dot');
+        const prevButton = document.querySelector('.prev-slide');
+        const nextButton = document.querySelector('.next-slide');
+        
+        let currentSlide = 0;
+        let touchStartX = 0;
+        let touchEndX = 0;
+        let isDragging = false;
+        let startTranslate = 0;
+        let autoSlideInterval;
+
+        function updateSlidePositions() {
+            slides.forEach((slide, index) => {
+                const offset = index - currentSlide;
+                slide.style.transform = `translateX(${offset * 100}%)`;
+                slide.style.transition = 'transform 0.5s ease-out';
+            });
+
+            // Update dots
+            dots.forEach((dot, index) => {
+                if (index === currentSlide) {
+                    dot.classList.add('!bg-white/90');
+                    dot.classList.remove('bg-white/50');
+                } else {
+                    dot.classList.remove('!bg-white/90');
+                    dot.classList.add('bg-white/50');
+                }
+            });
+        }
+
+        function moveSlide(direction) {
+            clearInterval(autoSlideInterval);
+            currentSlide = (currentSlide + direction + slides.length) % slides.length;
+            updateSlidePositions();
+            startAutoSlide();
+        }
+
+        function goToSlide(index) {
+            clearInterval(autoSlideInterval);
+            currentSlide = index;
+            updateSlidePositions();
+            startAutoSlide();
+        }
+
+        function startAutoSlide() {
+            autoSlideInterval = setInterval(() => moveSlide(1), 5000);
+        }
+
+        // Touch Events
+        slidesContainer.addEventListener('touchstart', (e) => {
+            touchStartX = e.touches[0].clientX;
+            isDragging = true;
+            startTranslate = currentSlide * -100;
+            
+            // Pause transitions while dragging
+            slides.forEach(slide => {
+                slide.style.transition = 'none';
+            });
+        });
+
+        slidesContainer.addEventListener('touchmove', (e) => {
+            if (!isDragging) return;
+            
+            e.preventDefault();
+            touchEndX = e.touches[0].clientX;
+            const diff = touchEndX - touchStartX;
+            const percentageMoved = (diff / slidesContainer.offsetWidth) * 100;
+            
+            // Update slides position during drag
+            slides.forEach((slide, index) => {
+                const offset = index - currentSlide;
+                const translateX = startTranslate + percentageMoved + (offset * 100);
+                slide.style.transform = `translateX(${translateX}%)`;
+            });
+        });
+
+        slidesContainer.addEventListener('touchend', (e) => {
+            isDragging = false;
+            const diff = touchEndX - touchStartX;
+            
+            // Restore transitions
+            slides.forEach(slide => {
+                slide.style.transition = 'transform 0.5s ease-out';
+            });
+            
+            // Determine if we should move to next/prev slide
+            if (Math.abs(diff) > slidesContainer.offsetWidth / 4) {
+                if (diff > 0) {
+                    moveSlide(-1); // Move to previous
+                } else {
+                    moveSlide(1);  // Move to next
+                }
+            } else {
+                updateSlidePositions(); // Snap back to current slide
+            }
+        });
+
+        // Mouse Events (similar to touch events)
+        slidesContainer.addEventListener('mousedown', (e) => {
+            e.preventDefault();
+            touchStartX = e.clientX;
+            isDragging = true;
+            startTranslate = currentSlide * -100;
+            
+            slides.forEach(slide => {
+                slide.style.transition = 'none';
+                slide.style.cursor = 'grabbing';
+            });
+        });
+
+        slidesContainer.addEventListener('mousemove', (e) => {
+            if (!isDragging) return;
+            
+            e.preventDefault();
+            touchEndX = e.clientX;
+            const diff = touchEndX - touchStartX;
+            const percentageMoved = (diff / slidesContainer.offsetWidth) * 100;
+            
+            slides.forEach((slide, index) => {
+                const offset = index - currentSlide;
+                const translateX = startTranslate + percentageMoved + (offset * 100);
+                slide.style.transform = `translateX(${translateX}%)`;
+            });
+        });
+
+        slidesContainer.addEventListener('mouseup', (e) => {
+            if (!isDragging) return;
+            
+            isDragging = false;
+            const diff = touchEndX - touchStartX;
+            
+            slides.forEach(slide => {
+                slide.style.transition = 'transform 0.5s ease-out';
+                slide.style.cursor = 'grab';
+            });
+            
+            if (Math.abs(diff) > slidesContainer.offsetWidth / 4) {
+                if (diff > 0) {
+                    moveSlide(-1);
+                } else {
+                    moveSlide(1);
+                }
+            } else {
+                updateSlidePositions();
+            }
+        });
+
+        slidesContainer.addEventListener('mouseleave', () => {
+            if (isDragging) {
+                isDragging = false;
+                updateSlidePositions();
+            }
+        });
+
+        // Button Events
+        prevButton.addEventListener('click', () => moveSlide(-1));
+        nextButton.addEventListener('click', () => moveSlide(1));
+
+        // Dot Events
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => goToSlide(index));
+        });
+
+        // Initialize carousel
+        if (slides.length > 0) {
+            slides.forEach(slide => {
+                slide.style.cursor = 'grab';
+            });
+            updateSlidePositions();
+            startAutoSlide();
+        }
+    });
+</script>
+{% endblock scripts_footer %} 
