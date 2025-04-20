@@ -76,6 +76,15 @@ Inicio
                         <span>{{ evento.lugar }}</span>
                     </div>
                     <p class="text-gray-600 line-clamp-3">{{ evento.descripcion }}</p>
+                    <div class="mt-4">
+                        <a href="{% url 'event_detail' evento.id %}" 
+                           class="inline-flex items-center text-[var(--theme-brown)] hover:text-[var(--theme-brown-hover)] font-medium transition-colors duration-200">
+                            Ver más detalles
+                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                            </svg>
+                        </a>
+                    </div>
                 </div>
             </div>
             {% endfor %}

@@ -69,6 +69,7 @@ def eventos_calendario_api(request):
     data = []
     for evento in eventos:
         data.append({
+            'id': evento.id,
             'title': evento.titulo,
             'start': evento.fecha.isoformat(),
             'description': evento.descripcion,
