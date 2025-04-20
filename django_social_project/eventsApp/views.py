@@ -3,6 +3,7 @@ from django.http import JsonResponse
 from .models import Evento, TeamMember, Servicio
 from django.utils import timezone
 from datetime import timedelta
+from django.core.paginator import Paginator
 
 # Create your views here.
 
@@ -21,7 +22,12 @@ def home(request):
     return render(request, 'eventsApp/home.html', context)
 
 def events(request):
-    eventos = Evento.objects.all().order_by('-fecha')
+    eventos_list = Evento.objects.all().order_by('-fecha')
+    paginator = Paginator(eventos_list, 10)  # 10 eventos por página
+    
+    page_number = request.GET.get('page', 1)
+    eventos = paginator.get_page(page_number)
+    
     context = {
         'eventos': eventos,
     }
