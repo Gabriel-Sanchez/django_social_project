@@ -1,4 +1,6 @@
 from django.db import models
+from ckeditor.fields import RichTextField
+from django.urls import reverse
 
 # Create your models here.
 class Evento(models.Model):
@@ -7,6 +9,10 @@ class Evento(models.Model):
     fecha = models.DateTimeField()
     lugar = models.CharField(max_length=200)
     creado_en = models.DateTimeField(auto_now_add=True)
+    contenido_detallado = RichTextField(blank=True, null=True, verbose_name="Contenido Detallado")
+
+    def get_absolute_url(self):
+        return reverse('event_detail', args=[str(self.id)])
 
     def __str__(self):
         return self.titulo

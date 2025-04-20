@@ -5,9 +5,19 @@ from .models import Evento, TeamMember, Servicio
 
 @admin.register(Evento)
 class EventoAdmin(admin.ModelAdmin):
-    list_display = ('titulo', 'fecha', 'lugar')
-    list_filter = ('fecha',)
-    search_fields = ('titulo', 'lugar', 'descripcion')
+    list_display = ('titulo', 'fecha', 'lugar', 'creado_en')
+    search_fields = ('titulo', 'descripcion', 'lugar')
+    list_filter = ('fecha', 'creado_en')
+    date_hierarchy = 'fecha'
+    fieldsets = (
+        ('Información básica', {
+            'fields': ('titulo', 'fecha', 'lugar', 'descripcion')
+        }),
+        ('Contenido detallado', {
+            'fields': ('contenido_detallado',),
+            'classes': ('collapse',)
+        }),
+    )
 
 @admin.register(TeamMember)
 class TeamMemberAdmin(admin.ModelAdmin):

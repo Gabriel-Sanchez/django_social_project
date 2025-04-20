@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import JsonResponse
 from .models import Evento, TeamMember, Servicio
 from django.utils import timezone
@@ -75,3 +75,10 @@ def eventos_calendario_api(request):
             'location': evento.lugar
         })
     return JsonResponse(data, safe=False)
+
+def event_detail(request, event_id):
+    evento = get_object_or_404(Evento, id=event_id)
+    context = {
+        'evento': evento,
+    }
+    return render(request, 'eventsApp/event_detail.html', context)
