@@ -131,6 +131,11 @@ Eventos
 {% block scripts_footer %}
 <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.js'></script>
 <script>
+// Función auxiliar para generar URLs de eventos
+function getEventDetailUrl(eventId) {
+    return '{% url "event_detail" 999999 %}'.replace('999999', eventId);
+}
+
 document.addEventListener('DOMContentLoaded', function() {
     var calendarEl = document.getElementById('calendar');
     var dialog = document.getElementById('eventDialog');
@@ -145,7 +150,7 @@ document.addEventListener('DOMContentLoaded', function() {
             right: 'today'
         },
         locale: 'es',
-        events: '/events/calendario/api/',
+        events: '{% url "eventos_calendario_api" %}',
         eventClick: function(info) {
             // Formatear la fecha
             var fecha = new Date(info.event.start).toLocaleDateString('es-ES', {
@@ -180,7 +185,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         <p class="text-gray-700">${info.event.extendedProps.description}</p>
                     </div>
                     <div class="mt-4">
-                        <a href="/events/events/${info.event.id}/" 
+                        <a href="${getEventDetailUrl(info.event.id)}" 
                            class="inline-flex items-center text-[var(--theme-brown)] hover:text-[var(--theme-brown-hover)] font-medium transition-colors duration-200">
                             Ver más detalles
                             <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">

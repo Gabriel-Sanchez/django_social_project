@@ -78,6 +78,9 @@ def historia(request):
 def donaciones(request):
     return render(request, 'eventsApp/donaciones.html')
 
+def contacto(request):
+    return render(request, 'eventsApp/contacto.html')
+
 def servicios(request):
     servicios = Servicio.objects.filter(activo=True)
     context = {
