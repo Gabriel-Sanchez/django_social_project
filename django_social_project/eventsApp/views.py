@@ -75,6 +75,9 @@ def equipo_pastoral(request):
 def historia(request):
     return render(request, 'eventsApp/historia.html')
 
+def donaciones(request):
+    return render(request, 'eventsApp/donaciones.html')
+
 def servicios(request):
     servicios = Servicio.objects.filter(activo=True)
     context = {

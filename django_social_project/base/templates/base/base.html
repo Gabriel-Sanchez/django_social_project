@@ -129,7 +129,18 @@
                                 <a href="{% url 'ubicacion' %}" class="dropdown-item">Ubicación</a>
                             </div>
                         </div>
-                        <a href="{% url 'contacto' %}" class="nav-link">CONTACTO</a>
+                        <div class="relative">
+                            <button class="nav-link dropdown-button flex items-center" aria-expanded="false">
+                                CONTACTO
+                                <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                </svg>
+                            </button>
+                            <div class="dropdown-menu">
+                                <a href="{% url 'contacto' %}" class="dropdown-item">Contáctanos</a>
+                                <a href="{% url 'donaciones' %}" class="dropdown-item">Donaciones</a>
+                            </div>
+                        </div>
                     </nav>
 
                     <!-- Botón menú móvil -->
@@ -158,7 +169,16 @@
                     <a href="{% url 'equipo_pastoral' %}" class="block py-2 pl-4">Equipo Pastoral</a>
                     <a href="{% url 'ubicacion' %}" class="block py-2 pl-4">Ubicación</a>
                 </div>
-                <a href="{% url 'contacto' %}" class="block py-2">CONTACTO</a>
+                <button class="block py-2 w-full text-left mobile-dropdown-button-contact">
+                    CONTACTO
+                    <svg class="w-4 h-4 ml-1 inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                    </svg>
+                </button>
+                <div class="mobile-dropdown-contact hidden">
+                    <a href="{% url 'contacto' %}" class="block py-2 pl-4">Contáctanos</a>
+                    <a href="{% url 'donaciones' %}" class="block py-2 pl-4">Donaciones</a>
+                </div>
             </div>
         </section>
     </div>
@@ -170,42 +190,55 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             // Manejo del dropdown en desktop
-            const dropdownButton = document.querySelector('.dropdown-button');
-            const dropdownMenu = document.querySelector('.dropdown-menu');
+            const dropdownButtons = document.querySelectorAll('.dropdown-button');
             
-            if (dropdownButton && dropdownMenu) {
+            dropdownButtons.forEach(button => {
+                const menu = button.nextElementSibling;
+                
                 // Toggle con click
-                dropdownButton.addEventListener('click', (e) => {
+                button.addEventListener('click', (e) => {
                     e.stopPropagation();
-                    dropdownMenu.classList.toggle('show');
-                    dropdownButton.setAttribute('aria-expanded', 
-                        dropdownMenu.classList.contains('show'));
-                });
-
-                // Cerrar al hacer click fuera
-                document.addEventListener('click', (e) => {
-                    if (!dropdownButton.contains(e.target) && !dropdownMenu.contains(e.target)) {
-                        dropdownMenu.classList.remove('show');
-                        dropdownButton.setAttribute('aria-expanded', 'false');
-                    }
+                    // Cerrar otros menús
+                    dropdownButtons.forEach(otherButton => {
+                        if (otherButton !== button) {
+                            otherButton.nextElementSibling.classList.remove('show');
+                            otherButton.setAttribute('aria-expanded', 'false');
+                        }
+                    });
+                    menu.classList.toggle('show');
+                    button.setAttribute('aria-expanded', 
+                        menu.classList.contains('show'));
                 });
 
                 // Soporte para navegación con teclado
-                dropdownButton.addEventListener('keydown', (e) => {
+                button.addEventListener('keydown', (e) => {
                     if (e.key === 'Enter' || e.key === ' ') {
                         e.preventDefault();
-                        dropdownMenu.classList.toggle('show');
-                        dropdownButton.setAttribute('aria-expanded', 
-                            dropdownMenu.classList.contains('show'));
+                        menu.classList.toggle('show');
+                        button.setAttribute('aria-expanded', 
+                            menu.classList.contains('show'));
                     }
                 });
-            }
+            });
+
+            // Cerrar al hacer click fuera
+            document.addEventListener('click', (e) => {
+                dropdownButtons.forEach(button => {
+                    const menu = button.nextElementSibling;
+                    if (!button.contains(e.target) && !menu.contains(e.target)) {
+                        menu.classList.remove('show');
+                        button.setAttribute('aria-expanded', 'false');
+                    }
+                });
+            });
 
             // Manejo del menú móvil
             const mobileMenuButton = document.querySelector('.mobile-menu-button');
             const mobileMenu = document.querySelector('.mobile-menu');
             const mobileDropdownButton = document.querySelector('.mobile-dropdown-button');
             const mobileDropdown = document.querySelector('.mobile-dropdown');
+            const mobileDropdownButtonContact = document.querySelector('.mobile-dropdown-button-contact');
+            const mobileDropdownContact = document.querySelector('.mobile-dropdown-contact');
 
             if (mobileMenuButton && mobileMenu) {
                 mobileMenuButton.addEventListener('click', () => {
@@ -216,6 +249,18 @@
             if (mobileDropdownButton && mobileDropdown) {
                 mobileDropdownButton.addEventListener('click', () => {
                     mobileDropdown.classList.toggle('hidden');
+                    if (mobileDropdownContact) {
+                        mobileDropdownContact.classList.add('hidden');
+                    }
+                });
+            }
+
+            if (mobileDropdownButtonContact && mobileDropdownContact) {
+                mobileDropdownButtonContact.addEventListener('click', () => {
+                    mobileDropdownContact.classList.toggle('hidden');
+                    if (mobileDropdown) {
+                        mobileDropdown.classList.add('hidden');
+                    }
                 });
             }
 
