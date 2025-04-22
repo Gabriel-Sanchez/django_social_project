@@ -72,21 +72,42 @@
         /* Estilos para móvil */
         .mobile-menu {
             display: none;
-            position: absolute;
-            top: 100%;
+            position: fixed;
+            top: 64px; /* Altura del header */
             left: 0;
             right: 0;
             background-color: white;
-            padding: 1rem;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 40;
+            max-height: calc(100vh - 64px); /* Altura máxima restante de la ventana */
+            overflow-y: auto; /* Permite scroll si el contenido es muy largo */
         }
 
         .mobile-menu.active {
             display: block;
         }
 
-        .mobile-dropdown {
-            margin-left: 1rem;
+        .mobile-menu a,
+        .mobile-menu button {
+            padding: 0.75rem 1rem;
+            color: var(--theme-brown);
+            transition: all 0.2s;
+        }
+
+        .mobile-menu a:hover,
+        .mobile-menu button:hover {
+            background-color: var(--theme-brown);
+            color: white;
+        }
+
+        .mobile-dropdown,
+        .mobile-dropdown-contact {
+            background-color: #f8f9fa;
+        }
+
+        .mobile-dropdown a,
+        .mobile-dropdown-contact a {
+            padding-left: 2rem;
         }
 
         /* Estilos para el footer */
