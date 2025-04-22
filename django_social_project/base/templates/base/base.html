@@ -30,6 +30,61 @@
         .event-card:hover {
             transform: translateY(-4px);
         }
+
+        /* Estilos mejorados para el dropdown */
+        .dropdown-button {
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: white;
+            border-radius: 0.5rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            min-width: 200px;
+            z-index: 50;
+        }
+
+        .dropdown-menu.show {
+            display: block;
+        }
+
+        .dropdown-item {
+            display: block;
+            padding: 0.75rem 1rem;
+            color: #4a5568;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+
+        .dropdown-item:hover {
+            background-color: #f7fafc;
+            color: #2d3748;
+        }
+
+        /* Estilos para móvil */
+        .mobile-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background-color: white;
+            padding: 1rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .mobile-menu.active {
+            display: block;
+        }
+
+        .mobile-dropdown {
+            margin-left: 1rem;
+        }
     </style>
 </head>
 
@@ -60,7 +115,20 @@
                         <a href="{% url 'home' %}" class="nav-link">INICIO</a>
                         <a href="{% url 'events' %}" class="nav-link">EVENTOS</a>
                         <a href="{% url 'servicios' %}" class="nav-link">SERVICIOS</a>
-                        <a href="{% url 'informacion_general' %}" class="nav-link">INFORMACIÓN</a>
+                        <div class="relative">
+                            <button class="nav-link dropdown-button flex items-center" aria-expanded="false">
+                                INFORMACIÓN
+                                <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                </svg>
+                            </button>
+                            <div class="dropdown-menu">
+                                <a href="{% url 'mision_vision_valores' %}" class="dropdown-item">Misión y Visión</a>
+                                <a href="{% url 'historia' %}" class="dropdown-item">Historia</a>
+                                <a href="{% url 'equipo_pastoral' %}" class="dropdown-item">Equipo Pastoral</a>
+                                <a href="{% url 'ubicacion' %}" class="dropdown-item">Ubicación</a>
+                            </div>
+                        </div>
                         <a href="{% url 'contacto' %}" class="nav-link">CONTACTO</a>
                     </nav>
 
@@ -75,11 +143,22 @@
 
             <!-- Menú móvil -->
             <div class="mobile-menu md:hidden">
-                <a href="{% url 'home' %}" class="nav-link">INICIO</a>
-                <a href="{% url 'events' %}" class="nav-link">EVENTOS</a>
-                <a href="{% url 'servicios' %}" class="nav-link">SERVICIOS</a>
-                <a href="{% url 'informacion_general' %}" class="nav-link">INFORMACIÓN</a>
-                <a href="{% url 'contacto' %}" class="nav-link">CONTACTO</a>
+                <a href="{% url 'home' %}" class="block py-2">INICIO</a>
+                <a href="{% url 'events' %}" class="block py-2">EVENTOS</a>
+                <a href="{% url 'servicios' %}" class="block py-2">SERVICIOS</a>
+                <button class="block py-2 w-full text-left mobile-dropdown-button">
+                    INFORMACIÓN
+                    <svg class="w-4 h-4 ml-1 inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                    </svg>
+                </button>
+                <div class="mobile-dropdown hidden">
+                    <a href="{% url 'mision_vision_valores' %}" class="block py-2 pl-4">Misión y Visión</a>
+                    <a href="{% url 'historia' %}" class="block py-2 pl-4">Historia</a>
+                    <a href="{% url 'equipo_pastoral' %}" class="block py-2 pl-4">Equipo Pastoral</a>
+                    <a href="{% url 'ubicacion' %}" class="block py-2 pl-4">Ubicación</a>
+                </div>
+                <a href="{% url 'contacto' %}" class="block py-2">CONTACTO</a>
             </div>
         </section>
     </div>
@@ -89,42 +168,66 @@
 
     <!-- Scripts -->
     <script>
-        // Función para manejar el scroll del header
-        function handleScroll() {
-            const header = document.querySelector('.site-header');
-            const scrolled = window.scrollY > 50;
-            header.classList.toggle('scrolled', scrolled);
-        }
-
-        // Función para manejar el menú móvil
-        function handleMobileMenu() {
-            const menuButton = document.querySelector('.mobile-menu-button');
-            const mobileMenu = document.querySelector('.mobile-menu');
-            
-            menuButton.addEventListener('click', () => {
-                mobileMenu.classList.toggle('active');
-            });
-
-            // Cerrar menú al hacer click en un enlace
-            document.querySelectorAll('.mobile-menu .nav-link').forEach(link => {
-                link.addEventListener('click', () => {
-                    mobileMenu.classList.remove('active');
-                });
-            });
-
-            // Cerrar menú al hacer click fuera
-            document.addEventListener('click', (e) => {
-                if (!menuButton.contains(e.target) && !mobileMenu.contains(e.target)) {
-                    mobileMenu.classList.remove('active');
-                }
-            });
-        }
-
-        // Inicializar funciones
         document.addEventListener('DOMContentLoaded', () => {
+            // Manejo del dropdown en desktop
+            const dropdownButton = document.querySelector('.dropdown-button');
+            const dropdownMenu = document.querySelector('.dropdown-menu');
+            
+            if (dropdownButton && dropdownMenu) {
+                // Toggle con click
+                dropdownButton.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    dropdownMenu.classList.toggle('show');
+                    dropdownButton.setAttribute('aria-expanded', 
+                        dropdownMenu.classList.contains('show'));
+                });
+
+                // Cerrar al hacer click fuera
+                document.addEventListener('click', (e) => {
+                    if (!dropdownButton.contains(e.target) && !dropdownMenu.contains(e.target)) {
+                        dropdownMenu.classList.remove('show');
+                        dropdownButton.setAttribute('aria-expanded', 'false');
+                    }
+                });
+
+                // Soporte para navegación con teclado
+                dropdownButton.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        dropdownMenu.classList.toggle('show');
+                        dropdownButton.setAttribute('aria-expanded', 
+                            dropdownMenu.classList.contains('show'));
+                    }
+                });
+            }
+
+            // Manejo del menú móvil
+            const mobileMenuButton = document.querySelector('.mobile-menu-button');
+            const mobileMenu = document.querySelector('.mobile-menu');
+            const mobileDropdownButton = document.querySelector('.mobile-dropdown-button');
+            const mobileDropdown = document.querySelector('.mobile-dropdown');
+
+            if (mobileMenuButton && mobileMenu) {
+                mobileMenuButton.addEventListener('click', () => {
+                    mobileMenu.classList.toggle('active');
+                });
+            }
+
+            if (mobileDropdownButton && mobileDropdown) {
+                mobileDropdownButton.addEventListener('click', () => {
+                    mobileDropdown.classList.toggle('hidden');
+                });
+            }
+
+            // Función para manejar el scroll del header
+            function handleScroll() {
+                const header = document.querySelector('.site-header');
+                const scrolled = window.scrollY > 50;
+                header.classList.toggle('scrolled', scrolled);
+            }
+
             window.addEventListener('scroll', handleScroll);
-            handleMobileMenu();
-            handleScroll(); // Llamada inicial para establecer el estado correcto
+            handleScroll();
         });
     </script>
 

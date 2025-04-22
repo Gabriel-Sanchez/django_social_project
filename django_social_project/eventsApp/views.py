@@ -54,7 +54,13 @@ def calendar_events(request):
         })
     return JsonResponse(events_list, safe=False)
 
-def informacion_general(request):
+def mision_vision_valores(request):
+    return render(request, 'eventsApp/mision_vision_valores.html')
+
+def ubicacion(request):
+    return render(request, 'eventsApp/ubicacion.html')
+
+def equipo_pastoral(request):
     sacerdotes = TeamMember.objects.filter(rol='sacerdote', activo=True)
     diaconos = TeamMember.objects.filter(rol='diacono', activo=True)
     administrativos = TeamMember.objects.filter(rol='administrativo', activo=True)
@@ -64,7 +70,10 @@ def informacion_general(request):
         'diaconos': diaconos,
         'administrativos': administrativos,
     }
-    return render(request, 'eventsApp/informacion_general.html', context)
+    return render(request, 'eventsApp/equipo_pastoral.html', context)
+
+def historia(request):
+    return render(request, 'eventsApp/historia.html')
 
 def servicios(request):
     servicios = Servicio.objects.filter(activo=True)

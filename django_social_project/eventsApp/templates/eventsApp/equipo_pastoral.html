@@ -1,0 +1,58 @@
+{% extends "base/base.html" %}
+{% load static %}
+
+{% block title %}
+Equipo Pastoral
+{% endblock title %}
+
+{% block content %}
+<header class="bg-[rgb(249, 230, 188)] text-black p-4">
+    <h1 class="text-center text-3xl font-bold">Equipo Pastoral</h1>
+</header>
+
+<main class="container mx-auto py-8 px-4">
+    <section class="mb-12">
+        {% if sacerdotes %}
+        <div class="mb-8">
+            <h3 class="text-xl font-semibold mb-4 text-[var(--theme-brown)]">Sacerdotes</h3>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {% for miembro in sacerdotes %}
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h4 class="text-lg font-semibold mb-2">{{ miembro.nombre }}</h4>
+                    <p class="text-gray-600">{{ miembro.descripcion }}</p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+
+        {% if diaconos %}
+        <div class="mb-8">
+            <h3 class="text-xl font-semibold mb-4 text-[var(--theme-brown)]">Diáconos</h3>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {% for miembro in diaconos %}
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h4 class="text-lg font-semibold mb-2">{{ miembro.nombre }}</h4>
+                    <p class="text-gray-600">{{ miembro.descripcion }}</p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+
+        {% if administrativos %}
+        <div>
+            <h3 class="text-xl font-semibold mb-4 text-[var(--theme-brown)]">Personal Administrativo</h3>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {% for miembro in administrativos %}
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h4 class="text-lg font-semibold mb-2">{{ miembro.nombre }}</h4>
+                    <p class="text-gray-600">{{ miembro.descripcion }}</p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+    </section>
+</main>
+{% endblock content %} 
