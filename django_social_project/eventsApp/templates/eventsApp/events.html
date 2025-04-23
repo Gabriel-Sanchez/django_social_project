@@ -15,6 +15,33 @@ Eventos
     }
     .fc-event {
         cursor: pointer;
+        color: var(--theme-blue) !important;
+        background-color: rgba(26, 35, 126, 0.1) !important;
+        transition: all 0.3s ease;
+        border: none !important;
+        padding: 2px 4px !important;
+        border-radius: 4px !important;
+    }
+    .fc-event:hover {
+        color: white !important;
+        background-color: var(--theme-brown) !important;
+    }
+    .fc-daygrid-event {
+        border: none !important;
+    }
+    .fc-daygrid-dot-event {
+        background-color: rgba(26, 35, 126, 0.1) !important;
+        padding: 2px 8px !important;
+    }
+    .fc-daygrid-dot-event:hover {
+        background-color: var(--theme-brown) !important;
+        color: white !important;
+    }
+    .fc-daygrid-dot-event .fc-event-title {
+        color: inherit !important;
+    }
+    .fc-daygrid-event-dot {
+        border-color: currentColor !important;
     }
     dialog {
         padding: 0;
