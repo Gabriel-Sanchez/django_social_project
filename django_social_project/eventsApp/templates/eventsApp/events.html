@@ -66,12 +66,12 @@ Eventos
 
     <!-- Lista de eventos -->
     <div id="lista-eventos" class="mt-8 max-w-4xl mx-auto">
-        <h2 class="text-2xl font-bold mb-6 text-[var(--theme-brown)]">Lista de Eventos</h2>
+        <h2 class="text-2xl font-bold mb-6 text-[var(--theme-blue)]">Lista de Eventos</h2>
         {% for evento in eventos %}
         <div class="bg-white rounded-lg shadow-md overflow-hidden mb-4 hover:shadow-lg transition-shadow duration-200">
             <div class="p-6">
                 <a href="{% url 'event_detail' evento.id %}" class="block">
-                    <h3 class="text-xl font-bold mb-2 text-[var(--theme-brown)] hover:text-[var(--theme-brown-hover)]">{{ evento.titulo }}</h3>
+                    <h3 class="text-xl font-bold mb-2 text-[var(--theme-blue)] hover:text-[var(--theme-brown)]">{{ evento.titulo }}</h3>
                     <div class="flex items-center text-gray-600 mb-3">
                         <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>

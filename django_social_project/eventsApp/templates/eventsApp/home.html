@@ -50,7 +50,7 @@ Inicio
 
     <div class="max-w-4xl mx-auto">
         <section class="mb-12 text-center">
-            <h2 class="text-2xl font-bold mb-4 text-[var(--theme-brown)]">Nuestra Comunidad</h2>
+            <h2 class="text-2xl font-bold mb-4 text-[var(--theme-blue)]">Nuestra Comunidad</h2>
             <p class="text-gray-700 leading-relaxed">
                 Bienvenidos a nuestra comunidad parroquial. Un lugar de encuentro, oración y servicio 
                 donde todos están invitados a participar y crecer en la fe.
@@ -59,7 +59,7 @@ Inicio
 
         <section class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
             <div class="bg-white p-6 rounded-lg shadow-md">
-                <h3 class="text-xl font-semibold mb-3 text-[var(--theme-brown)]">Horarios de Misa</h3>
+                <h3 class="text-xl font-semibold mb-3 text-[var(--theme-blue)]">Horarios de Misa</h3>
                 <ul class="space-y-2 text-gray-700">
                     <li>Lunes a Viernes: 7:00 AM y 6:00 PM</li>
                     <li>Sábados: 7:00 AM y 6:00 PM</li>
@@ -68,14 +68,14 @@ Inicio
             </div>
 
             <div class="bg-white p-6 rounded-lg shadow-md">
-                <h3 class="text-xl font-semibold mb-3 text-[var(--theme-brown)]">Servicios</h3>
+                <h3 class="text-xl font-semibold mb-3 text-[var(--theme-blue)]">Servicios</h3>
                 <ul class="space-y-2 text-gray-700">
                     {% for servicio in servicios %}
                     <li>{{ servicio.nombre }}</li>
                     {% endfor %}
                 </ul>
                 <div class="mt-4">
-                    <a href="{% url 'servicios' %}" class="text-[var(--theme-brown)] hover:text-[var(--theme-brown-hover)] font-medium">
+                    <a href="{% url 'servicios' %}" class="text-[var(--theme-blue)] hover:text-[var(--theme-brown)] font-medium">
                         Ver todos los servicios →
                     </a>
                 </div>
@@ -93,12 +93,12 @@ Inicio
 {% if eventos_proximos %}
 <div class="bg-[var(--neutral-50)] py-12">
     <div class="container mx-auto px-4">
-        <h2 class="text-2xl font-bold mb-6 text-[var(--theme-brown)] text-center">Próximos Eventos</h2>
+        <h2 class="text-2xl font-bold mb-6 text-[var(--theme-blue)] text-center">Próximos Eventos</h2>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
             {% for evento in eventos_proximos %}
             <div class="event-card bg-white rounded-lg shadow-md overflow-hidden">
                 <div class="p-6">
-                    <h3 class="text-xl font-bold mb-2 text-[var(--theme-brown)]">{{ evento.titulo }}</h3>
+                    <h3 class="text-xl font-bold mb-2 text-[var(--theme-blue)] hover:text-[var(--theme-brown)]">{{ evento.titulo }}</h3>
                     <div class="flex items-center text-gray-600 mb-3">
                         <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
@@ -115,7 +115,7 @@ Inicio
                     <p class="text-gray-600 line-clamp-3">{{ evento.descripcion }}</p>
                     <div class="mt-4">
                         <a href="{% url 'event_detail' evento.id %}" 
-                           class="inline-flex items-center text-[var(--theme-brown)] hover:text-[var(--theme-brown-hover)] font-medium transition-colors duration-200">
+                           class="inline-flex items-center text-[var(--theme-blue)] hover:text-[var(--theme-brown)] font-medium transition-colors duration-200">
                             Ver más detalles
                             <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
