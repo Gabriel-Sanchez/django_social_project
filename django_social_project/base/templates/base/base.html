@@ -134,9 +134,11 @@
                 <div class="max-w-6xl mx-auto flex items-center justify-between px-4">
                     <!-- Logo y Nombre de la Fundación -->
                     <div class="flex items-center space-x-3">
-                        <div class="logo-container">
-                            <img src="/media/assets/logo_procladepan.png" alt="Logo PROCLADEPAN" class="w-full h-full object-contain">
-                        </div>
+                        <a href="{% url 'home' %}">
+                            <div class="logo-container">
+                                <img src="/media/assets/logo_procladepan.png" alt="Logo PROCLADEPAN" class="w-full h-full object-contain">
+                            </div>
+                        </a>
                         <div class="site-title title-primary tracking-wide">
                             PROCLADEPAN<br>
                             <span class="title-secondary">Fundación</span>
@@ -147,7 +149,21 @@
                     <nav class="nav-menu hidden md:flex flex-row gap-6">
                         <a href="{% url 'home' %}" class="nav-link">INICIO</a>
                         <a href="{% url 'events' %}" class="nav-link">EVENTOS</a>
-                        <a href="{% url 'servicios' %}" class="nav-link">SERVICIOS</a>
+                        <div class="relative">
+                            <button class="nav-link dropdown-button flex items-center" aria-expanded="false">
+                                QUÉ HACEMOS
+                                <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                </svg>
+                            </button>
+                            <div class="dropdown-menu">
+                                <a href="{% url 'cooperacion' %}" class="dropdown-item">COOPERACIÓN</a>
+                                <a href="{% url 'ayuda_humanitaria' %}" class="dropdown-item">AYUDA HUMANITARIA</a>
+                                <a href="{% url 'accion_social' %}" class="dropdown-item">ACCIÓN SOCIAL</a>
+                                <a href="{% url 'educacion_sensibilizacion' %}" class="dropdown-item">EDUCACIÓN Y SENSIBILIZACIÓN</a>
+                                <a href="{% url 'comercio_justo' %}" class="dropdown-item">COMERCIO JUSTO</a>
+                            </div>
+                        </div>
                         <div class="relative">
                             <button class="nav-link dropdown-button flex items-center" aria-expanded="false">
                                 INFORMACIÓN
@@ -189,7 +205,19 @@
             <div class="mobile-menu md:hidden">
                 <a href="{% url 'home' %}" class="block py-2">INICIO</a>
                 <a href="{% url 'events' %}" class="block py-2">EVENTOS</a>
-                <a href="{% url 'servicios' %}" class="block py-2">SERVICIOS</a>
+                <button class="block py-2 w-full text-left mobile-dropdown-button">
+                    QUÉ HACEMOS
+                    <svg class="w-4 h-4 ml-1 inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                    </svg>
+                </button>
+                <div class="mobile-dropdown hidden">
+                    <a href="{% url 'cooperacion' %}" class="block py-2 pl-4">COOPERACIÓN</a>
+                    <a href="{% url 'ayuda_humanitaria' %}" class="block py-2 pl-4">AYUDA HUMANITARIA</a>
+                    <a href="{% url 'accion_social' %}" class="block py-2 pl-4">ACCIÓN SOCIAL</a>
+                    <a href="{% url 'educacion_sensibilizacion' %}" class="block py-2 pl-4">EDUCACIÓN Y SENSIBILIZACIÓN</a>
+                    <a href="{% url 'comercio_justo' %}" class="block py-2 pl-4">COMERCIO JUSTO</a>
+                </div>
                 <button class="block py-2 w-full text-left mobile-dropdown-button">
                     INFORMACIÓN
                     <svg class="w-4 h-4 ml-1 inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -209,7 +237,7 @@
                     </svg>
                 </button>
                 <div class="mobile-dropdown-contact hidden">
-                    <a href="{% url 'contacto' %}" class="block py-2 pl-4">Contáctanos</a>
+                    <a href="{% url 'contacto' %}" class="block py-2 pl-4">Voluntariado</a>
                     <a href="{% url 'donaciones' %}" class="block py-2 pl-4">Donaciones</a>
                 </div>
             </div>

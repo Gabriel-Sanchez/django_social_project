@@ -1,0 +1,50 @@
+{% extends 'eventsApp/que_hacemos/base_que_hacemos.html' %}
+
+{% block que_hacemos_title %}Cooperación{% endblock %}
+
+{% block que_hacemos_content %}
+<div class="space-y-6">
+    <p>
+        En PROCLADEPAN, nuestra labor de cooperación se centra en el desarrollo integral de las comunidades más vulnerables.
+        Trabajamos en estrecha colaboración con organizaciones locales y comunidades para implementar proyectos sostenibles
+        que generen un impacto positivo y duradero.
+    </p>
+
+    <h2 class="text-2xl font-semibold text-[var(--theme-brown)] mt-8">Áreas de Cooperación</h2>
+    
+    <div class="grid md:grid-cols-2 gap-6 mt-6">
+        <div class="bg-white p-6 rounded-lg shadow-md">
+            <h3 class="text-xl font-semibold mb-3">Desarrollo Comunitario</h3>
+            <p>Apoyamos iniciativas locales que fortalecen el tejido social y promueven el desarrollo económico sostenible de las comunidades.</p>
+        </div>
+        
+        <div class="bg-white p-6 rounded-lg shadow-md">
+            <h3 class="text-xl font-semibold mb-3">Infraestructura Social</h3>
+            <p>Contribuimos a la mejora de infraestructuras básicas como escuelas, centros de salud y sistemas de agua potable.</p>
+        </div>
+    </div>
+
+    <h2 class="text-2xl font-semibold text-[var(--theme-brown)] mt-8">Nuestro Impacto</h2>
+    
+    <ul class="list-disc pl-6 space-y-2">
+        <li>Más de X proyectos de desarrollo implementados</li>
+        <li>Y comunidades beneficiadas directamente</li>
+        <li>Z alianzas estratégicas con organizaciones locales</li>
+    </ul>
+
+    <div class="bg-gray-50 p-6 rounded-lg mt-8">
+        <h2 class="text-2xl font-semibold text-[var(--theme-brown)] mb-4">¿Cómo Participar?</h2>
+        <p>Si estás interesado en colaborar con nuestros proyectos de cooperación, puedes:</p>
+        <ul class="list-disc pl-6 mt-4 space-y-2">
+            <li>Unirte como voluntario</li>
+            <li>Realizar una donación</li>
+            <li>Proponer una colaboración institucional</li>
+        </ul>
+        <div class="mt-6">
+            <a href="{% url 'contacto' %}" class="inline-block bg-[var(--theme-brown)] text-white px-6 py-2 rounded-lg hover:bg-[var(--theme-brown-dark)] transition-colors">
+                Contacta con Nosotros
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %} 

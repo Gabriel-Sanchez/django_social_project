@@ -1,0 +1,62 @@
+{% extends 'eventsApp/que_hacemos/base_que_hacemos.html' %}
+
+{% block que_hacemos_title %}Educación y Sensibilización{% endblock %}
+
+{% block que_hacemos_content %}
+<div class="space-y-6">
+    <p>
+        En PROCLADEPAN, creemos que la educación y la sensibilización son herramientas fundamentales para el cambio social.
+        Trabajamos para crear conciencia sobre las realidades globales y locales, promoviendo valores de solidaridad,
+        justicia social y respeto por los derechos humanos.
+    </p>
+
+    <h2 class="text-2xl font-semibold text-[var(--theme-brown)] mt-8">Áreas de Trabajo</h2>
+    
+    <div class="grid md:grid-cols-2 gap-6 mt-6">
+        <div class="bg-white p-6 rounded-lg shadow-md">
+            <h3 class="text-xl font-semibold mb-3">Educación para el Desarrollo</h3>
+            <p>Desarrollamos programas educativos que promueven la comprensión de las desigualdades globales y fomentan el compromiso con la justicia social.</p>
+        </div>
+        
+        <div class="bg-white p-6 rounded-lg shadow-md">
+            <h3 class="text-xl font-semibold mb-3">Campañas de Sensibilización</h3>
+            <p>Organizamos actividades y eventos para concienciar sobre problemáticas sociales específicas y promover la participación ciudadana.</p>
+        </div>
+    </div>
+
+    <h2 class="text-2xl font-semibold text-[var(--theme-brown)] mt-8">Programas Educativos</h2>
+    
+    <div class="space-y-4">
+        <div class="bg-white p-6 rounded-lg shadow-md">
+            <h3 class="text-xl font-semibold mb-3">Talleres en Centros Educativos</h3>
+            <p>Realizamos talleres y actividades en escuelas y centros educativos para promover valores solidarios y conciencia social.</p>
+        </div>
+        
+        <div class="bg-white p-6 rounded-lg shadow-md">
+            <h3 class="text-xl font-semibold mb-3">Formación para Voluntarios</h3>
+            <p>Ofrecemos programas de formación específica para personas interesadas en el voluntariado y la acción social.</p>
+        </div>
+
+        <div class="bg-white p-6 rounded-lg shadow-md">
+            <h3 class="text-xl font-semibold mb-3">Materiales Didácticos</h3>
+            <p>Desarrollamos y distribuimos recursos educativos para facilitar la labor de educadores y agentes sociales.</p>
+        </div>
+    </div>
+
+    <div class="bg-gray-50 p-6 rounded-lg mt-8">
+        <h2 class="text-2xl font-semibold text-[var(--theme-brown)] mb-4">Participa en Nuestras Actividades</h2>
+        <p>Hay muchas formas de involucrarte en nuestra labor educativa:</p>
+        <ul class="list-disc pl-6 mt-4 space-y-2">
+            <li>Asiste a nuestros talleres y charlas</li>
+            <li>Solicita nuestros materiales educativos</li>
+            <li>Propón actividades en tu centro educativo</li>
+            <li>Forma parte de nuestro equipo de voluntarios</li>
+        </ul>
+        <div class="mt-6">
+            <a href="{% url 'contacto' %}" class="inline-block bg-[var(--theme-brown)] text-white px-6 py-2 rounded-lg hover:bg-[var(--theme-brown-dark)] transition-colors">
+                Infórmate y Participa
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %} 

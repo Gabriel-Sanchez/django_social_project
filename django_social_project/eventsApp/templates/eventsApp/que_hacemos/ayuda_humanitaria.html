@@ -1,0 +1,62 @@
+{% extends 'eventsApp/que_hacemos/base_que_hacemos.html' %}
+
+{% block que_hacemos_title %}Ayuda Humanitaria{% endblock %}
+
+{% block que_hacemos_content %}
+<div class="space-y-6">
+    <p>
+        En PROCLADEPAN, nuestra labor de ayuda humanitaria se enfoca en proporcionar asistencia inmediata y efectiva
+        a poblaciones afectadas por crisis, desastres naturales o situaciones de emergencia. Trabajamos para garantizar
+        que la ayuda llegue a quienes más la necesitan de manera rápida y eficiente.
+    </p>
+
+    <h2 class="text-2xl font-semibold text-[var(--theme-brown)] mt-8">Áreas de Acción</h2>
+    
+    <div class="grid md:grid-cols-2 gap-6 mt-6">
+        <div class="bg-white p-6 rounded-lg shadow-md">
+            <h3 class="text-xl font-semibold mb-3">Respuesta a Emergencias</h3>
+            <p>Proporcionamos ayuda inmediata en situaciones de crisis, incluyendo alimentos, agua potable, refugio y atención médica básica.</p>
+        </div>
+        
+        <div class="bg-white p-6 rounded-lg shadow-md">
+            <h3 class="text-xl font-semibold mb-3">Asistencia Prolongada</h3>
+            <p>Desarrollamos programas de apoyo continuo para comunidades afectadas por crisis prolongadas o desastres recurrentes.</p>
+        </div>
+    </div>
+
+    <h2 class="text-2xl font-semibold text-[var(--theme-brown)] mt-8">Nuestras Prioridades</h2>
+    
+    <div class="space-y-4">
+        <div class="bg-white p-6 rounded-lg shadow-md">
+            <h3 class="text-xl font-semibold mb-3">Alimentación y Nutrición</h3>
+            <p>Distribuimos alimentos y suplementos nutricionales a poblaciones vulnerables, con especial atención a niños y ancianos.</p>
+        </div>
+        
+        <div class="bg-white p-6 rounded-lg shadow-md">
+            <h3 class="text-xl font-semibold mb-3">Agua y Saneamiento</h3>
+            <p>Garantizamos el acceso a agua potable y condiciones sanitarias adecuadas en situaciones de emergencia.</p>
+        </div>
+
+        <div class="bg-white p-6 rounded-lg shadow-md">
+            <h3 class="text-xl font-semibold mb-3">Salud Básica</h3>
+            <p>Proporcionamos atención médica de emergencia y suministros médicos esenciales.</p>
+        </div>
+    </div>
+
+    <div class="bg-gray-50 p-6 rounded-lg mt-8">
+        <h2 class="text-2xl font-semibold text-[var(--theme-brown)] mb-4">¿Cómo Puedes Ayudar?</h2>
+        <p>Tu apoyo es fundamental para nuestra labor humanitaria. Puedes contribuir de diferentes maneras:</p>
+        <ul class="list-disc pl-6 mt-4 space-y-2">
+            <li>Donaciones económicas para emergencias específicas</li>
+            <li>Donaciones de suministros y materiales</li>
+            <li>Voluntariado en programas de ayuda</li>
+            <li>Difusión de nuestras campañas de ayuda</li>
+        </ul>
+        <div class="mt-6">
+            <a href="{% url 'contacto' %}" class="inline-block bg-[var(--theme-brown)] text-white px-6 py-2 rounded-lg hover:bg-[var(--theme-brown-dark)] transition-colors">
+                Únete a Nuestra Causa
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %} 

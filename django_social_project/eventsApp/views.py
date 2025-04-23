@@ -107,3 +107,18 @@ def event_detail(request, event_id):
         'evento': evento,
     }
     return render(request, 'eventsApp/event_detail.html', context)
+
+def cooperacion(request):
+    return render(request, 'eventsApp/que_hacemos/cooperacion.html')
+
+def ayuda_humanitaria(request):
+    return render(request, 'eventsApp/que_hacemos/ayuda_humanitaria.html')
+
+def accion_social(request):
+    return render(request, 'eventsApp/que_hacemos/accion_social.html')
+
+def educacion_sensibilizacion(request):
+    return render(request, 'eventsApp/que_hacemos/educacion_sensibilizacion.html')
+
+def comercio_justo(request):
+    return render(request, 'eventsApp/que_hacemos/comercio_justo.html')

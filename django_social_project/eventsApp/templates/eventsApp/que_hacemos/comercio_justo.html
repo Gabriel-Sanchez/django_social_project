@@ -1,0 +1,62 @@
+{% extends 'eventsApp/que_hacemos/base_que_hacemos.html' %}
+
+{% block que_hacemos_title %}Comercio Justo{% endblock %}
+
+{% block que_hacemos_content %}
+<div class="space-y-6">
+    <p>
+        En PROCLADEPAN, promovemos el Comercio Justo como una herramienta efectiva para el desarrollo sostenible
+        y la justicia económica. Trabajamos para crear conciencia sobre la importancia de un comercio más equitativo
+        y apoyamos a productores que siguen prácticas comerciales justas y sostenibles.
+    </p>
+
+    <h2 class="text-2xl font-semibold text-[var(--theme-brown)] mt-8">Principios del Comercio Justo</h2>
+    
+    <div class="grid md:grid-cols-2 gap-6 mt-6">
+        <div class="bg-white p-6 rounded-lg shadow-md">
+            <h3 class="text-xl font-semibold mb-3">Precio Justo</h3>
+            <p>Garantizamos que los productores reciban una compensación justa por su trabajo, que les permita mantener una vida digna.</p>
+        </div>
+        
+        <div class="bg-white p-6 rounded-lg shadow-md">
+            <h3 class="text-xl font-semibold mb-3">Sostenibilidad</h3>
+            <p>Promovemos prácticas de producción respetuosas con el medio ambiente y sostenibles a largo plazo.</p>
+        </div>
+    </div>
+
+    <h2 class="text-2xl font-semibold text-[var(--theme-brown)] mt-8">Nuestras Acciones</h2>
+    
+    <div class="space-y-4">
+        <div class="bg-white p-6 rounded-lg shadow-md">
+            <h3 class="text-xl font-semibold mb-3">Tienda Solidaria</h3>
+            <p>Comercializamos productos de comercio justo, garantizando su origen y el respeto a los principios de comercio justo.</p>
+        </div>
+        
+        <div class="bg-white p-6 rounded-lg shadow-md">
+            <h3 class="text-xl font-semibold mb-3">Sensibilización</h3>
+            <p>Organizamos campañas y eventos para dar a conocer los beneficios del comercio justo y su impacto en las comunidades productoras.</p>
+        </div>
+
+        <div class="bg-white p-6 rounded-lg shadow-md">
+            <h3 class="text-xl font-semibold mb-3">Apoyo a Productores</h3>
+            <p>Trabajamos directamente con cooperativas y productores locales para fortalecer sus capacidades y mejorar sus condiciones de vida.</p>
+        </div>
+    </div>
+
+    <div class="bg-gray-50 p-6 rounded-lg mt-8">
+        <h2 class="text-2xl font-semibold text-[var(--theme-brown)] mb-4">¿Cómo Apoyar el Comercio Justo?</h2>
+        <p>Puedes contribuir al desarrollo del comercio justo de varias maneras:</p>
+        <ul class="list-disc pl-6 mt-4 space-y-2">
+            <li>Compra productos de comercio justo en nuestra tienda</li>
+            <li>Participa en nuestras campañas de sensibilización</li>
+            <li>Difunde los principios del comercio justo</li>
+            <li>Apoya a los productores locales</li>
+        </ul>
+        <div class="mt-6">
+            <a href="{% url 'contacto' %}" class="inline-block bg-[var(--theme-brown)] text-white px-6 py-2 rounded-lg hover:bg-[var(--theme-brown-dark)] transition-colors">
+                Conoce Nuestros Productos
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %} 
