@@ -70,11 +70,14 @@
 
         /* Estilos específicos que usan las variables CSS */
         .nav-link {
-            @apply font-semibold tracking-wide;
+            @apply tracking-wide;
             color: var(--theme-blue);
             transition: all 0.2s ease-in-out;
             position: relative;
             padding: 0.5rem 0;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.025em;
         }
 
         .nav-link::after {
@@ -97,11 +100,14 @@
         }
 
         .dropdown-button {
-            @apply font-semibold tracking-wide;
+            @apply tracking-wide;
             color: var(--theme-blue);
             transition: all 0.2s ease-in-out;
             position: relative;
             padding: 0.5rem 0;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.025em;
         }
 
         .dropdown-button::after {
@@ -320,11 +326,11 @@
                                 </svg>
                             </button>
                             <div class="dropdown-menu">
-                                <a href="{% url 'cooperacion' %}" class="dropdown-item hover:bg-[var(--theme-brown)] hover:text-white">COOPERACIÓN</a>
-                                <a href="{% url 'ayuda_humanitaria' %}" class="dropdown-item hover:bg-[var(--theme-brown)] hover:text-white">AYUDA HUMANITARIA</a>
-                                <a href="{% url 'accion_social' %}" class="dropdown-item hover:bg-[var(--theme-brown)] hover:text-white">ACCIÓN SOCIAL</a>
-                                <a href="{% url 'educacion_sensibilizacion' %}" class="dropdown-item hover:bg-[var(--theme-brown)] hover:text-white">EDUCACIÓN Y SENSIBILIZACIÓN</a>
-                                <a href="{% url 'comercio_justo' %}" class="dropdown-item hover:bg-[var(--theme-brown)] hover:text-white">COMERCIO JUSTO</a>
+                                <a href="{% url 'cooperacion' %}" class="dropdown-item">COOPERACIÓN</a>
+                                <a href="{% url 'ayuda_humanitaria' %}" class="dropdown-item">AYUDA HUMANITARIA</a>
+                                <a href="{% url 'accion_social' %}" class="dropdown-item">ACCIÓN SOCIAL</a>
+                                <a href="{% url 'educacion_sensibilizacion' %}" class="dropdown-item">EDUCACIÓN Y SENSIBILIZACIÓN</a>
+                                <a href="{% url 'comercio_justo' %}" class="dropdown-item">COMERCIO JUSTO</a>
                             </div>
                         </div>
                         <a href="{% url 'servicios' %}" class="nav-link hover:text-[var(--theme-brown)]">SERVICIOS</a>
@@ -336,10 +342,10 @@
                                 </svg>
                             </button>
                             <div class="dropdown-menu">
-                                <a href="{% url 'mision_vision_valores' %}" class="dropdown-item hover:bg-[var(--theme-brown)] hover:text-white">Misión y Visión</a>
-                                <a href="{% url 'historia' %}" class="dropdown-item hover:bg-[var(--theme-brown)] hover:text-white">Historia</a>
-                                <a href="{% url 'equipo_pastoral' %}" class="dropdown-item hover:bg-[var(--theme-brown)] hover:text-white">Equipo Pastoral</a>
-                                <a href="{% url 'ubicacion' %}" class="dropdown-item hover:bg-[var(--theme-brown)] hover:text-white">Ubicación</a>
+                                <a href="{% url 'mision_vision_valores' %}" class="dropdown-item">Misión y Visión</a>
+                                <a href="{% url 'historia' %}" class="dropdown-item">Historia</a>
+                                <a href="{% url 'equipo_pastoral' %}" class="dropdown-item">Equipo Pastoral</a>
+                                <a href="{% url 'ubicacion' %}" class="dropdown-item">Ubicación</a>
                             </div>
                         </div>
                         <div class="relative">
@@ -350,8 +356,8 @@
                                 </svg>
                             </button>
                             <div class="dropdown-menu">
-                                <a href="{% url 'contacto' %}" class="dropdown-item hover:bg-[var(--theme-brown)] hover:text-white">Voluntariado</a>
-                                <a href="{% url 'donaciones' %}" class="dropdown-item hover:bg-[var(--theme-brown)] hover:text-white">Donaciones</a>
+                                <a href="{% url 'contacto' %}" class="dropdown-item">Voluntariado</a>
+                                <a href="{% url 'donaciones' %}" class="dropdown-item">Donaciones</a>
                             </div>
                         </div>
                     </nav>
@@ -367,43 +373,43 @@
 
             <!-- Menú móvil -->
             <div class="mobile-menu md:hidden">
-                <a href="{% url 'home' %}" class="block py-2 hover:bg-[var(--theme-brown)] hover:text-white">INICIO</a>
-                <a href="{% url 'events' %}" class="block py-2 hover:bg-[var(--theme-brown)] hover:text-white">EVENTOS</a>
-                <button class="block py-2 w-full text-left hover:bg-[var(--theme-brown)] hover:text-white mobile-dropdown-button">
+                <a href="{% url 'home' %}" class="block py-2">INICIO</a>
+                <a href="{% url 'events' %}" class="block py-2">EVENTOS</a>
+                <button class="block py-2 w-full text-left mobile-dropdown-button">
                     QUÉ HACEMOS
                     <svg class="w-4 h-4 ml-1 inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
                     </svg>
                 </button>
                 <div class="mobile-dropdown hidden">
-                    <a href="{% url 'cooperacion' %}" class="block py-2 pl-4 hover:bg-[var(--theme-brown)] hover:text-white">COOPERACIÓN</a>
-                    <a href="{% url 'ayuda_humanitaria' %}" class="block py-2 pl-4 hover:bg-[var(--theme-brown)] hover:text-white">AYUDA HUMANITARIA</a>
-                    <a href="{% url 'accion_social' %}" class="block py-2 pl-4 hover:bg-[var(--theme-brown)] hover:text-white">ACCIÓN SOCIAL</a>
-                    <a href="{% url 'educacion_sensibilizacion' %}" class="block py-2 pl-4 hover:bg-[var(--theme-brown)] hover:text-white">EDUCACIÓN Y SENSIBILIZACIÓN</a>
-                    <a href="{% url 'comercio_justo' %}" class="block py-2 pl-4 hover:bg-[var(--theme-brown)] hover:text-white">COMERCIO JUSTO</a>
+                    <a href="{% url 'cooperacion' %}" class="block py-2 pl-4">COOPERACIÓN</a>
+                    <a href="{% url 'ayuda_humanitaria' %}" class="block py-2 pl-4">AYUDA HUMANITARIA</a>
+                    <a href="{% url 'accion_social' %}" class="block py-2 pl-4">ACCIÓN SOCIAL</a>
+                    <a href="{% url 'educacion_sensibilizacion' %}" class="block py-2 pl-4">EDUCACIÓN Y SENSIBILIZACIÓN</a>
+                    <a href="{% url 'comercio_justo' %}" class="block py-2 pl-4">COMERCIO JUSTO</a>
                 </div>
-                <a href="{% url 'servicios' %}" class="block py-2 hover:bg-[var(--theme-brown)] hover:text-white">SERVICIOS</a>
-                <button class="block py-2 w-full text-left hover:bg-[var(--theme-brown)] hover:text-white mobile-dropdown-button">
+                <a href="{% url 'servicios' %}" class="block py-2">SERVICIOS</a>
+                <button class="block py-2 w-full text-left mobile-dropdown-button">
                     INFORMACIÓN
                     <svg class="w-4 h-4 ml-1 inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
                     </svg>
                 </button>
                 <div class="mobile-dropdown hidden">
-                    <a href="{% url 'mision_vision_valores' %}" class="block py-2 pl-4 hover:bg-[var(--theme-brown)] hover:text-white">Misión y Visión</a>
-                    <a href="{% url 'historia' %}" class="block py-2 pl-4 hover:bg-[var(--theme-brown)] hover:text-white">Historia</a>
-                    <a href="{% url 'equipo_pastoral' %}" class="block py-2 pl-4 hover:bg-[var(--theme-brown)] hover:text-white">Equipo Pastoral</a>
-                    <a href="{% url 'ubicacion' %}" class="block py-2 pl-4 hover:bg-[var(--theme-brown)] hover:text-white">Ubicación</a>
+                    <a href="{% url 'mision_vision_valores' %}" class="block py-2 pl-4">Misión y Visión</a>
+                    <a href="{% url 'historia' %}" class="block py-2 pl-4">Historia</a>
+                    <a href="{% url 'equipo_pastoral' %}" class="block py-2 pl-4">Equipo Pastoral</a>
+                    <a href="{% url 'ubicacion' %}" class="block py-2 pl-4">Ubicación</a>
                 </div>
-                <button class="block py-2 w-full text-left hover:bg-[var(--theme-brown)] hover:text-white mobile-dropdown-button-contact">
+                <button class="block py-2 w-full text-left mobile-dropdown-button-contact">
                     CONTACTO
                     <svg class="w-4 h-4 ml-1 inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
                     </svg>
                 </button>
                 <div class="mobile-dropdown-contact hidden">
-                    <a href="{% url 'contacto' %}" class="block py-2 pl-4 hover:bg-[var(--theme-brown)] hover:text-white">Voluntariado</a>
-                    <a href="{% url 'donaciones' %}" class="block py-2 pl-4 hover:bg-[var(--theme-brown)] hover:text-white">Donaciones</a>
+                    <a href="{% url 'contacto' %}" class="block py-2 pl-4">Voluntariado</a>
+                    <a href="{% url 'donaciones' %}" class="block py-2 pl-4">Donaciones</a>
                 </div>
             </div>
         </section>
