@@ -1,5 +1,5 @@
 from django.db import models
-from ckeditor.fields import RichTextField
+from django_ckeditor_5.fields import CKEditor5Field
 from django.urls import reverse
 
 # Create your models here.
@@ -9,7 +9,7 @@ class Evento(models.Model):
     fecha = models.DateTimeField()
     lugar = models.CharField(max_length=200)
     creado_en = models.DateTimeField(auto_now_add=True)
-    contenido_detallado = RichTextField(blank=True, null=True, verbose_name="Contenido Detallado")
+    contenido_detallado = CKEditor5Field(blank=True, null=True, verbose_name="Contenido Detallado", config_name='extends')
 
     def get_absolute_url(self):
         return reverse('event_detail', args=[str(self.id)])
@@ -70,3 +70,24 @@ class CarouselImage(models.Model):
 
     def __str__(self):
         return self.titulo
+
+class About(models.Model):
+    objetivo = CKEditor5Field(verbose_name="Objetivo", config_name='extends')
+    mision = CKEditor5Field(verbose_name="Misión", config_name='extends')
+    vision = CKEditor5Field(verbose_name="Visión", config_name='extends')
+    historia = CKEditor5Field(verbose_name="Historia", config_name='extends')
+    activo = models.BooleanField(default=True, help_text="Solo debe haber un registro activo")
+    fecha_actualizacion = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name = "Información Institucional"
+        verbose_name_plural = "Información Institucional"
+
+    def __str__(self):
+        return "Información Institucional"
+
+    def save(self, *args, **kwargs):
+        if self.activo:
+            # Desactivar otros registros activos
+            About.objects.exclude(pk=self.pk).update(activo=False)
+        super().save(*args, **kwargs)

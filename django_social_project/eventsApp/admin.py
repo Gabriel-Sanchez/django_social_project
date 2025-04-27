@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 # Register your models here.
-from .models import Evento, TeamMember, Servicio, CarouselImage
+from .models import Evento, TeamMember, Servicio, CarouselImage, About
 
 @admin.register(Evento)
 class EventoAdmin(admin.ModelAdmin):
@@ -40,3 +40,19 @@ class CarouselImageAdmin(admin.ModelAdmin):
     list_filter = ('activo',)
     search_fields = ('titulo', 'subtitulo')
     ordering = ['orden', '-fecha_creacion']
+
+@admin.register(About)
+class AboutAdmin(admin.ModelAdmin):
+    list_display = ('__str__', 'activo', 'fecha_actualizacion')
+    list_editable = ('activo',)
+    fieldsets = (
+        ('Información General', {
+            'fields': ('objetivo', 'mision', 'vision')
+        }),
+        ('Historia', {
+            'fields': ('historia',)
+        }),
+        ('Estado', {
+            'fields': ('activo',)
+        }),
+    )
