@@ -5,13 +5,13 @@ from django.core.exceptions import ValidationError
 
 def validate_team_image_size(image):
     filesize = image.size
-    megabyte_limit = 2.0
+    megabyte_limit = 1.0
     if filesize > megabyte_limit * 1024 * 1024:
         raise ValidationError(f"La imagen no puede ser mayor a {megabyte_limit}MB")
 
 def validate_carousel_image_size(image):
     filesize = image.size
-    megabyte_limit = 5.0
+    megabyte_limit = 2.0
     if filesize > megabyte_limit * 1024 * 1024:
         raise ValidationError(f"La imagen no puede ser mayor a {megabyte_limit}MB")
 
@@ -45,7 +45,7 @@ class TeamMember(models.Model):
         blank=True, 
         null=True,
         validators=[validate_team_image_size],
-        help_text="Máximo 2MB. Formato recomendado: JPG o PNG"
+        help_text="Máximo 1MB. Formato recomendado: JPG o PNG"
     )
     orden = models.IntegerField(default=0)
     activo = models.BooleanField(default=True)
@@ -78,7 +78,7 @@ class CarouselImage(models.Model):
     subtitulo = models.CharField(max_length=200, help_text="Subtítulo o descripción corta")
     imagen = models.ImageField(
         upload_to='carousel/', 
-        help_text="Imagen para el carrusel (recomendado: 1920x1080px). Máximo 5MB. Formato recomendado: JPG",
+        help_text="Imagen para el carrusel (recomendado: 1920x1080px). Máximo 2MB. Formato recomendado: JPG",
         validators=[validate_carousel_image_size]
     )
     orden = models.IntegerField(default=0, help_text="Orden en que aparecerá la imagen (menor número = primero)")
