@@ -1,6 +1,19 @@
 from django.db import models
 from django_ckeditor_5.fields import CKEditor5Field
 from django.urls import reverse
+from django.core.exceptions import ValidationError
+
+def validate_team_image_size(image):
+    filesize = image.size
+    megabyte_limit = 2.0
+    if filesize > megabyte_limit * 1024 * 1024:
+        raise ValidationError(f"La imagen no puede ser mayor a {megabyte_limit}MB")
+
+def validate_carousel_image_size(image):
+    filesize = image.size
+    megabyte_limit = 5.0
+    if filesize > megabyte_limit * 1024 * 1024:
+        raise ValidationError(f"La imagen no puede ser mayor a {megabyte_limit}MB")
 
 # Create your models here.
 class Evento(models.Model):
@@ -27,7 +40,13 @@ class TeamMember(models.Model):
     nombre = models.CharField(max_length=100)
     rol = models.CharField(max_length=20, choices=ROL_CHOICES)
     descripcion = models.TextField()
-    imagen = models.ImageField(upload_to='team/', blank=True, null=True)
+    imagen = models.ImageField(
+        upload_to='team/', 
+        blank=True, 
+        null=True,
+        validators=[validate_team_image_size],
+        help_text="Máximo 2MB. Formato recomendado: JPG o PNG"
+    )
     orden = models.IntegerField(default=0)
     activo = models.BooleanField(default=True)
 
@@ -57,7 +76,11 @@ class Servicio(models.Model):
 class CarouselImage(models.Model):
     titulo = models.CharField(max_length=100, help_text="Título que aparecerá sobre la imagen")
     subtitulo = models.CharField(max_length=200, help_text="Subtítulo o descripción corta")
-    imagen = models.ImageField(upload_to='carousel/', help_text="Imagen para el carrusel (recomendado: 1920x1080px)")
+    imagen = models.ImageField(
+        upload_to='carousel/', 
+        help_text="Imagen para el carrusel (recomendado: 1920x1080px). Máximo 5MB. Formato recomendado: JPG",
+        validators=[validate_carousel_image_size]
+    )
     orden = models.IntegerField(default=0, help_text="Orden en que aparecerá la imagen (menor número = primero)")
     activo = models.BooleanField(default=True, help_text="Determina si la imagen se muestra en el carrusel")
     fecha_creacion = models.DateTimeField(auto_now_add=True)
