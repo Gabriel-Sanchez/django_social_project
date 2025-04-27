@@ -165,7 +165,14 @@ CKEDITOR_5_CONFIGS = {
     'default': {
         'toolbar': ['heading', '|', 'bold', 'italic', 'link',
                    'bulletedList', 'numberedList', 'blockQuote', 'imageUpload', ],
-
+        'heading': {
+            'options': [
+                {'model': 'paragraph', 'title': 'Párrafo', 'class': 'ck-heading_paragraph'},
+                {'model': 'heading1', 'view': 'h1', 'title': 'Título 1', 'class': 'ck-heading_heading1'},
+                {'model': 'heading2', 'view': 'h2', 'title': 'Título 2', 'class': 'ck-heading_heading2'},
+                {'model': 'heading3', 'view': 'h3', 'title': 'Título 3', 'class': 'ck-heading_heading3'}
+            ]
+        }
     },
     'extends': {
         'blockToolbar': [
@@ -176,11 +183,10 @@ CKEDITOR_5_CONFIGS = {
             'blockQuote',
         ],
         'toolbar': ['heading', '|', 'outdent', 'indent', '|', 'bold', 'italic', 'link', 'underline', 'strikethrough',
-                'code','subscript', 'superscript', 'highlight', '|', 'codeBlock',
-                'sourceEditing', 'insertImage',
-                '|', 'bulletedList', 'numberedList', 'todoList', '|',  'blockQuote', '|',
-                'fontSize', 'fontFamily', 'fontColor', 'fontBackgroundColor', 'mediaEmbed', 'removeFormat',
-                '-', 'insertTable', 'alignment', '|', 'link', 'imageUpload', 'undo', 'redo'],
+                'code','subscript', 'superscript', 'highlight', '|',
+                'bulletedList', 'numberedList', 'todoList', '|',  'blockQuote', '|',
+                'fontSize', 'fontFamily', 'fontColor', 'fontBackgroundColor', 'removeFormat',
+                '-', 'insertTable', 'alignment', 'link', 'imageUpload', 'undo', 'redo'],
         'image': {
             'toolbar': ['imageTextAlternative', '|', 'imageStyle:alignLeft',
                        'imageStyle:alignRight', 'imageStyle:alignCenter', 'imageStyle:side',  '|'],
@@ -191,7 +197,6 @@ CKEDITOR_5_CONFIGS = {
                 'alignRight',
                 'alignCenter',
             ]
-
         },
         'table': {
             'contentToolbar': [ 'tableColumn', 'tableRow', 'mergeTableCells',
@@ -207,15 +212,39 @@ CKEDITOR_5_CONFIGS = {
         },
         'heading' : {
             'options': [
-                { 'model': 'paragraph', 'title': 'Paragraph', 'class': 'ck-heading_paragraph' },
-                { 'model': 'heading1', 'view': 'h1', 'title': 'Heading 1', 'class': 'ck-heading_heading1' },
-                { 'model': 'heading2', 'view': 'h2', 'title': 'Heading 2', 'class': 'ck-heading_heading2' },
-                { 'model': 'heading3', 'view': 'h3', 'title': 'Heading 3', 'class': 'ck-heading_heading3' }
+                { 'model': 'paragraph', 'title': 'Párrafo', 'class': 'ck-heading_paragraph' },
+                { 'model': 'heading1', 'view': 'h1', 'title': 'Título 1', 'class': 'ck-heading_heading1' },
+                { 'model': 'heading2', 'view': 'h2', 'title': 'Título 2', 'class': 'ck-heading_heading2' },
+                { 'model': 'heading3', 'view': 'h3', 'title': 'Título 3', 'class': 'ck-heading_heading3' }
+            ]
+        },
+        'language': 'es',
+        'alignment': {
+            'options': ['left', 'center', 'right', 'justify']
+        },
+        'fontSize': {
+            'options': [
+                9,
+                11,
+                13,
+                'default',
+                17,
+                19,
+                21
+            ]
+        },
+        'fontFamily': {
+            'options': [
+                'default',
+                'Arial, Helvetica, sans-serif',
+                'Times New Roman, Times, serif',
+                'Courier New, Courier, monospace'
             ]
         }
     }
 }
 
-# Media files configuration for CKEditor 5
+# Configuración adicional para CKEditor 5
 CKEDITOR_5_FILE_STORAGE = "django.core.files.storage.FileSystemStorage"
 CKEDITOR_5_UPLOAD_PATH = "uploads/"
+CKEDITOR_5_CUSTOM_CSS = "/static/admin/css/custom_admin.css"  # Ruta a nuestro CSS personalizado
