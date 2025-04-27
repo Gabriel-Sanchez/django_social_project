@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import JsonResponse
-from .models import Evento, TeamMember, Servicio, CarouselImage
+from .models import Evento, TeamMember, Servicio, CarouselImage, About
 from django.utils import timezone
 from datetime import timedelta
 from django.core.paginator import Paginator
@@ -55,7 +55,11 @@ def calendar_events(request):
     return JsonResponse(events_list, safe=False)
 
 def mision_vision_valores(request):
-    return render(request, 'eventsApp/mision_vision_valores.html')
+    about = About.objects.filter(activo=True).first()
+    context = {
+        'about': about,
+    }
+    return render(request, 'eventsApp/mision_vision_valores.html', context)
 
 def ubicacion(request):
     return render(request, 'eventsApp/ubicacion.html')
@@ -73,7 +77,11 @@ def equipo_pastoral(request):
     return render(request, 'eventsApp/equipo_pastoral.html', context)
 
 def historia(request):
-    return render(request, 'eventsApp/historia.html')
+    about = About.objects.filter(activo=True).first()
+    context = {
+        'about': about,
+    }
+    return render(request, 'eventsApp/historia.html', context)
 
 def donaciones(request):
     return render(request, 'eventsApp/donaciones.html')

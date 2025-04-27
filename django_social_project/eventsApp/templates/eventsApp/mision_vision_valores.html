@@ -2,12 +2,12 @@
 {% load static %}
 
 {% block title %}
-Misión, Visión y Valores
+Misión, Visión y Objetivos
 {% endblock title %}
 
 {% block content %}
 <header class="bg-[rgb(249, 230, 188)] text-black p-4">
-    <h1 class="text-center text-3xl font-bold">Misión, Visión y Valores</h1>
+    <h1 class="text-center text-3xl font-bold">Misión, Visión y Objetivos</h1>
 </header>
 
 <main class="container mx-auto py-8 px-4">
@@ -15,27 +15,21 @@ Misión, Visión y Valores
         <div class="grid md:grid-cols-3 gap-8">
             <div class="bg-white p-6 rounded-lg shadow-md">
                 <h3 class="text-xl font-semibold mb-4 text-[var(--theme-brown)]">Misión</h3>
-                <p class="text-gray-700">
-                    Nuestra misión es servir a la comunidad a través de la fe, la educación y el apoyo mutuo, 
-                    creando un espacio acogedor donde todos puedan crecer espiritualmente.
-                </p>
+                <div class="text-gray-700">
+                    {{ about.mision|safe }}
+                </div>
             </div>
             <div class="bg-white p-6 rounded-lg shadow-md">
                 <h3 class="text-xl font-semibold mb-4 text-[var(--theme-brown)]">Visión</h3>
-                <p class="text-gray-700">
-                    Ser una comunidad parroquial vibrante y unida que inspire a sus miembros a vivir y compartir 
-                    activamente su fe, siendo un faro de esperanza y amor en nuestra sociedad.
-                </p>
+                <div class="text-gray-700">
+                    {{ about.vision|safe }}
+                </div>
             </div>
             <div class="bg-white p-6 rounded-lg shadow-md">
-                <h3 class="text-xl font-semibold mb-4 text-[var(--theme-brown)]">Valores</h3>
-                <ul class="text-gray-700 space-y-2">
-                    <li>• Fe y Espiritualidad</li>
-                    <li>• Servicio a la Comunidad</li>
-                    <li>• Respeto y Dignidad</li>
-                    <li>• Solidaridad</li>
-                    <li>• Compromiso Social</li>
-                </ul>
+                <h3 class="text-xl font-semibold mb-4 text-[var(--theme-brown)]">Objetivos</h3>
+                <div class="text-gray-700">
+                    {{ about.objetivo|safe }}
+                </div>
             </div>
         </div>
     </section>
