@@ -71,7 +71,7 @@
         /* Estilos específicos que usan las variables CSS */
         .nav-link {
             @apply font-semibold tracking-wide;
-            color: var(--neutral-700);
+            color: var(--theme-blue);
             transition: all 0.2s ease-in-out;
             position: relative;
             padding: 0.5rem 0;
@@ -98,7 +98,7 @@
 
         .dropdown-button {
             @apply font-semibold tracking-wide;
-            color: var(--neutral-700);
+            color: var(--theme-blue);
             transition: all 0.2s ease-in-out;
             position: relative;
             padding: 0.5rem 0;
@@ -168,15 +168,33 @@
         .dropdown-item {
             display: block;
             padding: 0.75rem 1.25rem;
-            color: var(--neutral-700);
-            font-weight: 500;
+            color: var(--theme-blue);
+            font-weight: 600;
             text-decoration: none;
             transition: all 0.2s ease-in-out;
+            text-transform: uppercase;
+            letter-spacing: 0.025em;
+            position: relative;
         }
 
         .dropdown-item:hover {
+            color: var(--theme-brown);
+            background-color: transparent;
+        }
+
+        .dropdown-item::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0.5rem;
+            left: 1.25rem;
             background-color: var(--theme-brown);
-            color: white;
+            transition: width 0.2s ease-in-out;
+        }
+
+        .dropdown-item:hover::after {
+            width: calc(100% - 2.5rem);
         }
 
         /* Estilos para móvil */
@@ -204,24 +222,33 @@
             width: 100%;
             text-align: left;
             color: var(--theme-blue);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.025em;
             transition: all 0.2s ease-in-out;
         }
 
         .mobile-menu a:hover,
         .mobile-menu button:hover {
-            background-color: var(--theme-brown);
-            color: white;
+            color: var(--theme-brown);
+            background-color: transparent;
         }
 
         .mobile-dropdown,
         .mobile-dropdown-contact {
-            background-color: #f8f9fa;
+            background-color: transparent;
         }
 
         .mobile-dropdown a,
         .mobile-dropdown-contact a {
             padding-left: 2rem;
             color: var(--theme-blue);
+        }
+
+        .mobile-dropdown a:hover,
+        .mobile-dropdown-contact a:hover {
+            color: var(--theme-brown);
+            background-color: transparent;
         }
 
         .mobile-menu-button {
