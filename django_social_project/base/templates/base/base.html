@@ -69,20 +69,65 @@
 
         /* Estilos específicos que usan las variables CSS */
         .nav-link {
-            @apply font-medium underline-offset-2 decoration-1;
-            color: var(--theme-blue);
-            transition: color 0.2s ease-in-out;
+            @apply font-semibold tracking-wide;
+            color: var(--neutral-700);
+            transition: all 0.2s ease-in-out;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--theme-brown);
+            transition: width 0.2s ease-in-out;
         }
 
         .nav-link:hover {
             color: var(--theme-brown);
         }
-        
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .dropdown-button {
+            @apply font-semibold tracking-wide;
+            color: var(--neutral-700);
+            transition: all 0.2s ease-in-out;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+
+        .dropdown-button::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--theme-brown);
+            transition: width 0.2s ease-in-out;
+        }
+
+        .dropdown-button:hover {
+            color: var(--theme-brown);
+        }
+
+        .dropdown-button:hover::after {
+            width: 100%;
+        }
+
         .gradient-bg {
             background: linear-gradient(135deg, 
-                var(--blue-light), 
-                var(--primary-white));
-            opacity: 0.97;
+                rgba(255, 255, 255, 0.95), 
+                rgba(255, 255, 255, 0.98));
+            backdrop-filter: blur(8px);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
 
         .event-card {
@@ -94,17 +139,6 @@
         }
 
         /* Estilos mejorados para el dropdown */
-        .dropdown-button {
-            cursor: pointer;
-            user-select: none;
-            color: var(--theme-blue);
-            transition: color 0.2s ease-in-out;
-        }
-
-        .dropdown-button:hover {
-            color: var(--theme-brown);
-        }
-
         .dropdown-menu {
             display: none;
             position: absolute;
@@ -112,19 +146,29 @@
             left: 0;
             background-color: white;
             border-radius: 0.5rem;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            min-width: 200px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            min-width: 220px;
             z-index: 50;
+            padding: 0.5rem 0;
+            margin-top: 0.5rem;
+            border: 1px solid var(--neutral-200);
+            transform-origin: top;
+            transition: all 0.2s ease-out;
+            opacity: 0;
+            transform: translateY(-10px);
         }
 
         .dropdown-menu.show {
             display: block;
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .dropdown-item {
             display: block;
-            padding: 0.75rem 1rem;
-            color: var(--theme-blue);
+            padding: 0.75rem 1.25rem;
+            color: var(--neutral-700);
+            font-weight: 500;
             text-decoration: none;
             transition: all 0.2s ease-in-out;
         }
