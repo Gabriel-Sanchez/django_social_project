@@ -1,0 +1,254 @@
+{% extends 'base/base.html' %}
+
+{% block title %}Fundaciones Hermanas - PROCLADEPAN Fundación{% endblock %}
+
+{% block content %}
+<div class="container mx-auto px-4 py-8">
+    <!-- Header Section -->
+    <div class="text-center mb-12">
+        <h1 class="text-4xl font-bold text-[rgb(0,103,198)] mb-4">Fundaciones Hermanas</h1>
+        <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+            PROCLADEPAN forma parte de una red internacional de fundaciones comprometidas con el desarrollo social, 
+            la cooperación internacional y la ayuda humanitaria. Conoce a nuestras organizaciones hermanas que 
+            trabajan por los mismos ideales en diferentes países.
+        </p>
+    </div>
+
+    <!-- Foundations Grid -->
+    <div class="grid md:grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+        
+        <!-- Proclade Internazionale -->
+        <div class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
+            <div class="bg-gradient-to-r from-[rgb(0,103,198)] to-[rgb(51,133,255)] p-6">
+                <h2 class="text-2xl font-bold text-white mb-2">Proclade Internazionale</h2>
+                <p class="text-white/90 text-sm">Roma, Italia</p>
+            </div>
+            
+            <div class="p-6">
+                <div class="mb-4">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-2">Misión</h3>
+                    <p class="text-gray-600 text-sm">
+                        Organización sin fines de lucro de la Congregación Claretiana comprometida con las 
+                        prácticas de desarrollo en 69 países alrededor del mundo.
+                    </p>
+                </div>
+                
+                <div class="mb-4">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-2">Áreas de Trabajo</h3>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-xs">Educación</span>
+                        <span class="bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs">Salud</span>
+                        <span class="bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full text-xs">Seguridad Alimentaria</span>
+                        <span class="bg-purple-100 text-purple-800 px-2 py-1 rounded-full text-xs">Medio Ambiente</span>
+                        <span class="bg-red-100 text-red-800 px-2 py-1 rounded-full text-xs">Energía Renovable</span>
+                    </div>
+                </div>
+                
+                <div class="mb-4">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-2">Contacto</h3>
+                    <p class="text-gray-600 text-sm">
+                        <i class="fas fa-map-marker-alt mr-2"></i>5 Via Sacro Cuore di Maria – 00197 Roma, Italia<br>
+                        <i class="fas fa-phone mr-2"></i>+39 06 80910022<br>
+                        <i class="fas fa-envelope mr-2"></i>projects.proclade@gmail.com
+                    </p>
+                </div>
+                
+                <div class="flex space-x-4">
+                    <a href="https://procladeint.org/" target="_blank" rel="noopener noreferrer" 
+                       class="bg-[rgb(0,103,198)] text-white px-4 py-2 rounded-lg hover:bg-[rgb(0,93,178)] transition-colors duration-300 flex items-center">
+                        <i class="fas fa-external-link-alt mr-2"></i>Visitar Sitio Web
+                    </a>
+                    <a href="https://procladeint.org/" target="_blank" rel="noopener noreferrer" 
+                       class="border border-[rgb(0,103,198)] text-[rgb(0,103,198)] px-4 py-2 rounded-lg hover:bg-[rgb(0,103,198)] hover:text-white transition-colors duration-300 flex items-center">
+                        <i class="fab fa-facebook mr-2"></i>Facebook
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Fundación Proclade España -->
+        <div class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
+            <div class="bg-gradient-to-r from-[rgb(0,103,198)] to-[rgb(51,133,255)] p-6">
+                <h2 class="text-2xl font-bold text-white mb-2">Fundación Proclade</h2>
+                <p class="text-white/90 text-sm">España</p>
+            </div>
+            
+            <div class="p-6">
+                <div class="mb-4">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-2">Sobre la Organización</h3>
+                    <p class="text-gray-600 text-sm">
+                        Más de 170 voluntarios y voluntarias trabajando en 17 delegaciones, con el apoyo de 
+                        más de 1500 personas (padrinos, colaboradores y donantes) que contribuyen al desarrollo 
+                        de proyectos de cooperación al desarrollo.
+                    </p>
+                </div>
+                
+                <div class="mb-4">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-2">Áreas de Trabajo</h3>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-xs">Cooperación al Desarrollo</span>
+                        <span class="bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs">Ayuda Humanitaria</span>
+                        <span class="bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full text-xs">Acción Social</span>
+                        <span class="bg-purple-100 text-purple-800 px-2 py-1 rounded-full text-xs">Educación y Sensibilización</span>
+                        <span class="bg-red-100 text-red-800 px-2 py-1 rounded-full text-xs">Comercio Justo</span>
+                    </div>
+                </div>
+                
+                <div class="mb-4">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-2">Contacto</h3>
+                    <p class="text-gray-600 text-sm">
+                        <i class="fas fa-envelope mr-2"></i>info@fundacionproclade.org<br>
+                        <i class="fas fa-globe mr-2"></i>Trabajando en más de 20 países
+                    </p>
+                </div>
+                
+                <div class="flex space-x-4">
+                    <a href="https://www.fundacionproclade.org/" target="_blank" rel="noopener noreferrer" 
+                       class="bg-[rgb(0,103,198)] text-white px-4 py-2 rounded-lg hover:bg-[rgb(0,93,178)] transition-colors duration-300 flex items-center">
+                        <i class="fas fa-external-link-alt mr-2"></i>Visitar Sitio Web
+                    </a>
+                    <a href="https://www.fundacionproclade.org/" target="_blank" rel="noopener noreferrer" 
+                       class="border border-[rgb(0,103,198)] text-[rgb(0,103,198)] px-4 py-2 rounded-lg hover:bg-[rgb(0,103,198)] hover:text-white transition-colors duration-300 flex items-center">
+                        <i class="fab fa-facebook mr-2"></i>Redes Sociales
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Web Previews Section -->
+    <div class="mb-12">
+        <h2 class="text-3xl font-bold text-[rgb(0,103,198)] text-center mb-8">Vista Previa de los Sitios Web</h2>
+        
+        <div class="grid lg:grid-cols-2 gap-8">
+            <!-- Proclade Internacional Preview -->
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                <div class="bg-gray-100 p-4 border-b">
+                    <h3 class="text-lg font-semibold text-gray-800 flex items-center">
+                        <i class="fas fa-globe mr-2"></i>Proclade Internazionale - Roma
+                    </h3>
+                    <p class="text-sm text-gray-600">procladeint.org</p>
+                </div>
+                <div class="relative" style="height: 400px;">
+                    <iframe 
+                        src="https://procladeint.org/" 
+                        class="w-full h-full border-0"
+                        title="Proclade Internazionale Website Preview"
+                        loading="lazy"
+                        sandbox="allow-scripts allow-same-origin">
+                    </iframe>
+                    <div class="absolute inset-0 bg-black bg-opacity-0 hover:bg-opacity-10 transition-all duration-300 flex items-center justify-center opacity-0 hover:opacity-100">
+                        <a href="https://procladeint.org/" target="_blank" rel="noopener noreferrer" 
+                           class="bg-white text-[rgb(0,103,198)] px-6 py-3 rounded-lg font-semibold shadow-lg hover:shadow-xl transition-shadow duration-300">
+                            <i class="fas fa-external-link-alt mr-2"></i>Abrir Sitio Completo
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Fundación Proclade España Preview -->
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                <div class="bg-gray-100 p-4 border-b">
+                    <h3 class="text-lg font-semibold text-gray-800 flex items-center">
+                        <i class="fas fa-globe mr-2"></i>Fundación Proclade - España
+                    </h3>
+                    <p class="text-sm text-gray-600">fundacionproclade.org</p>
+                </div>
+                <div class="relative" style="height: 400px;">
+                    <iframe 
+                        src="https://www.fundacionproclade.org/" 
+                        class="w-full h-full border-0"
+                        title="Fundación Proclade Website Preview"
+                        loading="lazy"
+                        sandbox="allow-scripts allow-same-origin">
+                    </iframe>
+                    <div class="absolute inset-0 bg-black bg-opacity-0 hover:bg-opacity-10 transition-all duration-300 flex items-center justify-center opacity-0 hover:opacity-100">
+                        <a href="https://www.fundacionproclade.org/" target="_blank" rel="noopener noreferrer" 
+                           class="bg-white text-[rgb(0,103,198)] px-6 py-3 rounded-lg font-semibold shadow-lg hover:shadow-xl transition-shadow duration-300">
+                            <i class="fas fa-external-link-alt mr-2"></i>Abrir Sitio Completo
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Network Information -->
+    <div class="bg-gradient-to-r from-[rgb(0,103,198)] to-[rgb(51,133,255)] rounded-lg p-8 text-white text-center">
+        <h2 class="text-3xl font-bold mb-4">Red Internacional PROCLADE</h2>
+        <p class="text-lg mb-6">
+            Juntos trabajamos por un mundo más justo y solidario, compartiendo experiencias, 
+            recursos y conocimientos para maximizar nuestro impacto en las comunidades más necesitadas.
+        </p>
+        <div class="grid md:grid-cols-3 gap-6 mt-8">
+            <div class="text-center">
+                <div class="text-3xl font-bold mb-2">69+</div>
+                <div class="text-sm opacity-90">Países con Presencia</div>
+            </div>
+            <div class="text-center">
+                <div class="text-3xl font-bold mb-2">1500+</div>
+                <div class="text-sm opacity-90">Colaboradores Activos</div>
+            </div>
+            <div class="text-center">
+                <div class="text-3xl font-bold mb-2">170+</div>
+                <div class="text-sm opacity-90">Voluntarios Comprometidos</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+/* Estilos adicionales para los iframes */
+.iframe-container {
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+}
+
+.iframe-container:hover {
+    transform: scale(1.02);
+}
+
+/* Animaciones para las cards */
+.card-animate {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: slideUp 0.6s ease-out forwards;
+}
+
+@keyframes slideUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .iframe-container {
+        height: 300px !important;
+    }
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Add animation to cards when they come into view
+    const cards = document.querySelectorAll('.bg-white.rounded-lg.shadow-lg');
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('card-animate');
+            }
+        });
+    }, {
+        threshold: 0.1
+    });
+    
+    cards.forEach(card => {
+        observer.observe(card);
+    });
+});
+</script>
+{% endblock %} 

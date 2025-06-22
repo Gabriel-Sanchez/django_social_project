@@ -86,6 +86,9 @@ def historia(request):
     }
     return render(request, 'eventsApp/historia.html', context)
 
+def fundaciones_hermanas(request):
+    return render(request, 'eventsApp/fundaciones_hermanas.html')
+
 def donaciones(request):
     return render(request, 'eventsApp/donaciones.html')
 
