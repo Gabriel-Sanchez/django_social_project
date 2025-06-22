@@ -1,0 +1,128 @@
+{% extends "base/base.html" %}
+{% load static %}
+
+{% block title %}
+Noticias - PROCLADEPAN Fundación
+{% endblock title %}
+
+{% block content %}
+<header class="bg-gradient-to-r from-[rgb(0,103,198)] to-[rgb(51,133,255)] text-white p-8">
+    <div class="container mx-auto text-center">
+        <h1 class="text-4xl font-bold mb-2">Noticias</h1>
+        <p class="text-lg opacity-90">Mantente informado sobre nuestras actividades y logros</p>
+    </div>
+</header>
+
+<main class="container mx-auto py-8 px-4">
+    {% if noticias %}
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {% for noticia in noticias %}
+            <article class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
+                {% if noticia.imagen %}
+                <div class="h-48 overflow-hidden">
+                    <img src="{{ noticia.imagen.url }}" alt="{{ noticia.titulo }}" 
+                         class="w-full h-full object-cover hover:scale-105 transition-transform duration-300">
+                </div>
+                {% endif %}
+                
+                <div class="p-6">
+                    {% if noticia.destacada %}
+                    <div class="mb-2">
+                        <span class="bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full text-xs font-semibold">
+                            <i class="fas fa-star mr-1"></i>Destacada
+                        </span>
+                    </div>
+                    {% endif %}
+                    
+                    <h2 class="text-xl font-bold mb-3 text-[var(--theme-blue)] hover:text-[var(--theme-brown)] transition-colors">
+                        <a href="{% url 'noticia_detail' noticia.id %}">{{ noticia.titulo }}</a>
+                    </h2>
+                    
+                    <p class="text-gray-600 mb-4 line-clamp-3">{{ noticia.resumen }}</p>
+                    
+                    <div class="flex items-center justify-between text-sm text-gray-500 mb-4">
+                        <div class="flex items-center">
+                            <i class="fas fa-user mr-1"></i>
+                            <span>{{ noticia.autor }}</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-calendar mr-1"></i>
+                            <span>{{ noticia.fecha_publicacion|date:"d/m/Y" }}</span>
+                        </div>
+                    </div>
+                    
+                    <a href="{% url 'noticia_detail' noticia.id %}" 
+                       class="inline-flex items-center text-[var(--theme-blue)] hover:text-[var(--theme-brown)] font-semibold transition-colors">
+                        Leer más
+                        <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+            </article>
+            {% endfor %}
+        </div>
+
+        <!-- Paginación -->
+        {% if noticias.has_other_pages %}
+        <div class="flex justify-center mt-8">
+            <nav class="flex items-center space-x-2">
+                {% if noticias.has_previous %}
+                    <a href="?page={{ noticias.previous_page_number }}" 
+                       class="px-3 py-2 text-[var(--theme-blue)] hover:text-[var(--theme-brown)] border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">
+                        <i class="fas fa-chevron-left"></i>
+                    </a>
+                {% endif %}
+
+                {% for num in noticias.paginator.page_range %}
+                    {% if noticias.number == num %}
+                        <span class="px-3 py-2 bg-[var(--theme-blue)] text-white rounded-lg">{{ num }}</span>
+                    {% elif num > noticias.number|add:'-3' and num < noticias.number|add:'3' %}
+                        <a href="?page={{ num }}" 
+                           class="px-3 py-2 text-[var(--theme-blue)] hover:text-[var(--theme-brown)] border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">
+                            {{ num }}
+                        </a>
+                    {% endif %}
+                {% endfor %}
+
+                {% if noticias.has_next %}
+                    <a href="?page={{ noticias.next_page_number }}" 
+                       class="px-3 py-2 text-[var(--theme-blue)] hover:text-[var(--theme-brown)] border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">
+                        <i class="fas fa-chevron-right"></i>
+                    </a>
+                {% endif %}
+            </nav>
+        </div>
+        {% endif %}
+
+    {% else %}
+        <div class="text-center py-12">
+            <div class="max-w-md mx-auto">
+                <i class="fas fa-newspaper text-6xl text-gray-300 mb-4"></i>
+                <h2 class="text-2xl font-bold text-gray-600 mb-2">No hay noticias disponibles</h2>
+                <p class="text-gray-500">Pronto publicaremos nuevas noticias sobre nuestras actividades.</p>
+            </div>
+        </div>
+    {% endif %}
+</main>
+
+<style>
+/* Estilo para líneas limitadas */
+.line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* Animaciones */
+.hover\:scale-105:hover {
+    transform: scale(1.05);
+}
+
+/* Variables CSS */
+:root {
+    --theme-blue: rgb(0, 103, 198);
+    --theme-brown: rgb(139, 69, 19);
+}
+</style>
+
+{% endblock content %} 

@@ -20,5 +20,7 @@ urlpatterns = [
     path('accion-social/', views.accion_social, name='accion_social'),
     path('educacion-sensibilizacion/', views.educacion_sensibilizacion, name='educacion_sensibilizacion'),
     path('comercio-justo/', views.comercio_justo, name='comercio_justo'),
+    path('noticias/', views.noticias, name='noticias'),
+    path('noticias/<int:noticia_id>/', views.noticia_detail, name='noticia_detail'),
     path('', views.home, name='index'),  # Redirige la raíz a inicio
 ]

@@ -94,6 +94,34 @@ class CarouselImage(models.Model):
     def __str__(self):
         return self.titulo
 
+class Noticia(models.Model):
+    titulo = models.CharField(max_length=200, verbose_name="Título")
+    resumen = models.TextField(max_length=300, verbose_name="Resumen", help_text="Resumen corto de la noticia (máximo 300 caracteres)")
+    contenido = CKEditor5Field(verbose_name="Contenido", config_name='extends')
+    imagen = models.ImageField(
+        upload_to='noticias/', 
+        blank=True, 
+        null=True,
+        validators=[validate_carousel_image_size],
+        help_text="Imagen principal de la noticia. Máximo 2MB. Formato recomendado: JPG o PNG"
+    )
+    autor = models.CharField(max_length=100, default="PROCLADEPAN", verbose_name="Autor")
+    fecha_publicacion = models.DateTimeField(auto_now_add=True, verbose_name="Fecha de Publicación")
+    fecha_actualizacion = models.DateTimeField(auto_now=True, verbose_name="Última Actualización")
+    activo = models.BooleanField(default=True, verbose_name="Publicado")
+    destacada = models.BooleanField(default=False, help_text="Marcar si es una noticia destacada")
+
+    class Meta:
+        ordering = ['-fecha_publicacion']
+        verbose_name = 'Noticia'
+        verbose_name_plural = 'Noticias'
+
+    def __str__(self):
+        return self.titulo
+
+    def get_absolute_url(self):
+        return reverse('noticia_detail', args=[str(self.id)])
+
 class About(models.Model):
     objetivo = CKEditor5Field(verbose_name="Objetivo", config_name='extends')
     mision = CKEditor5Field(verbose_name="Misión", config_name='extends')

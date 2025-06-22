@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import JsonResponse
-from .models import Evento, TeamMember, Servicio, CarouselImage, About
+from .models import Evento, TeamMember, Servicio, CarouselImage, About, Noticia
 from django.utils import timezone
 from datetime import timedelta
 from django.core.paginator import Paginator
@@ -199,3 +199,29 @@ def educacion_sensibilizacion(request):
 
 def comercio_justo(request):
     return render(request, 'eventsApp/que_hacemos/comercio_justo.html')
+
+def noticias(request):
+    noticias_list = Noticia.objects.filter(activo=True).order_by('-fecha_publicacion')
+    paginator = Paginator(noticias_list, 6)  # 6 noticias por página
+    
+    page_number = request.GET.get('page', 1)
+    noticias_paginadas = paginator.get_page(page_number)
+    
+    context = {
+        'noticias': noticias_paginadas,
+    }
+    return render(request, 'eventsApp/noticias.html', context)
+
+def noticia_detail(request, noticia_id):
+    noticia = get_object_or_404(Noticia, id=noticia_id, activo=True)
+    
+    # Obtener noticias relacionadas (las 3 más recientes excluyendo la actual)
+    noticias_relacionadas = Noticia.objects.filter(
+        activo=True
+    ).exclude(id=noticia_id).order_by('-fecha_publicacion')[:3]
+    
+    context = {
+        'noticia': noticia,
+        'noticias_relacionadas': noticias_relacionadas,
+    }
+    return render(request, 'eventsApp/noticia_detail.html', context)
