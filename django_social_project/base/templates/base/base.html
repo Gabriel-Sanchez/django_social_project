@@ -333,7 +333,18 @@
                                 <a href="{% url 'comercio_justo' %}" class="dropdown-item">COMERCIO JUSTO</a>
                             </div>
                         </div>
-                        <a href="{% url 'servicios' %}" class="nav-link hover:text-[var(--theme-brown)]">SERVICIOS</a>
+                        <div class="relative">
+                            <button class="nav-link dropdown-button flex items-center hover:text-[var(--theme-brown)]" aria-expanded="false">
+                                SERVICIOS
+                                <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                </svg>
+                            </button>
+                            <div class="dropdown-menu">
+                                <a href="{% url 'servicios' %}" class="dropdown-item">Servicios</a>
+                                <a href="{% url 'contacto' %}" class="dropdown-item">Voluntariado</a>
+                            </div>
+                        </div>
                         <div class="relative">
                             <button class="nav-link dropdown-button flex items-center hover:text-[var(--theme-brown)]" aria-expanded="false">
                                 INFORMACIÓN
@@ -344,8 +355,7 @@
                             <div class="dropdown-menu">
                                 <a href="{% url 'mision_vision_valores' %}" class="dropdown-item">Misión y Visión</a>
                                 <a href="{% url 'historia' %}" class="dropdown-item">Historia</a>
-                                <a href="{% url 'equipo_pastoral' %}" class="dropdown-item">Equipo Pastoral</a>
-                                <a href="{% url 'ubicacion' %}" class="dropdown-item">Ubicación</a>
+                                <a href="{% url 'equipo_pastoral' %}" class="dropdown-item">Estructura Organizacional</a>
                             </div>
                         </div>
                         <div class="relative">
@@ -356,8 +366,8 @@
                                 </svg>
                             </button>
                             <div class="dropdown-menu">
-                                <a href="{% url 'contacto' %}" class="dropdown-item">Voluntariado</a>
                                 <a href="{% url 'donaciones' %}" class="dropdown-item">Donaciones</a>
+                                <a href="{% url 'ubicacion' %}" class="dropdown-item">Ubicación</a>
                             </div>
                         </div>
                     </nav>
@@ -388,7 +398,16 @@
                     <a href="{% url 'educacion_sensibilizacion' %}" class="block py-2 pl-4">EDUCACIÓN Y SENSIBILIZACIÓN</a>
                     <a href="{% url 'comercio_justo' %}" class="block py-2 pl-4">COMERCIO JUSTO</a>
                 </div>
-                <a href="{% url 'servicios' %}" class="block py-2">SERVICIOS</a>
+                <button class="block py-2 w-full text-left mobile-dropdown-button-servicios">
+                    SERVICIOS
+                    <svg class="w-4 h-4 ml-1 inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                    </svg>
+                </button>
+                <div class="mobile-dropdown-servicios hidden">
+                    <a href="{% url 'servicios' %}" class="block py-2 pl-4">Servicios</a>
+                    <a href="{% url 'contacto' %}" class="block py-2 pl-4">Voluntariado</a>
+                </div>
                 <button class="block py-2 w-full text-left mobile-dropdown-button">
                     INFORMACIÓN
                     <svg class="w-4 h-4 ml-1 inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -398,8 +417,7 @@
                 <div class="mobile-dropdown hidden">
                     <a href="{% url 'mision_vision_valores' %}" class="block py-2 pl-4">Misión y Visión</a>
                     <a href="{% url 'historia' %}" class="block py-2 pl-4">Historia</a>
-                    <a href="{% url 'equipo_pastoral' %}" class="block py-2 pl-4">Equipo Pastoral</a>
-                    <a href="{% url 'ubicacion' %}" class="block py-2 pl-4">Ubicación</a>
+                    <a href="{% url 'equipo_pastoral' %}" class="block py-2 pl-4">Estructura Organizacional</a>
                 </div>
                 <button class="block py-2 w-full text-left mobile-dropdown-button-contact">
                     CONTACTO
@@ -408,8 +426,8 @@
                     </svg>
                 </button>
                 <div class="mobile-dropdown-contact hidden">
-                    <a href="{% url 'contacto' %}" class="block py-2 pl-4">Voluntariado</a>
                     <a href="{% url 'donaciones' %}" class="block py-2 pl-4">Donaciones</a>
+                    <a href="{% url 'ubicacion' %}" class="block py-2 pl-4">Ubicación</a>
                 </div>
             </div>
         </section>
@@ -511,6 +529,8 @@
             const mobileMenu = document.querySelector('.mobile-menu');
             const mobileDropdownButton = document.querySelector('.mobile-dropdown-button');
             const mobileDropdown = document.querySelector('.mobile-dropdown');
+            const mobileDropdownButtonServicios = document.querySelector('.mobile-dropdown-button-servicios');
+            const mobileDropdownServicios = document.querySelector('.mobile-dropdown-servicios');
             const mobileDropdownButtonContact = document.querySelector('.mobile-dropdown-button-contact');
             const mobileDropdownContact = document.querySelector('.mobile-dropdown-contact');
 
@@ -523,6 +543,21 @@
             if (mobileDropdownButton && mobileDropdown) {
                 mobileDropdownButton.addEventListener('click', () => {
                     mobileDropdown.classList.toggle('hidden');
+                    if (mobileDropdownServicios) {
+                        mobileDropdownServicios.classList.add('hidden');
+                    }
+                    if (mobileDropdownContact) {
+                        mobileDropdownContact.classList.add('hidden');
+                    }
+                });
+            }
+
+            if (mobileDropdownButtonServicios && mobileDropdownServicios) {
+                mobileDropdownButtonServicios.addEventListener('click', () => {
+                    mobileDropdownServicios.classList.toggle('hidden');
+                    if (mobileDropdown) {
+                        mobileDropdown.classList.add('hidden');
+                    }
                     if (mobileDropdownContact) {
                         mobileDropdownContact.classList.add('hidden');
                     }
@@ -534,6 +569,9 @@
                     mobileDropdownContact.classList.toggle('hidden');
                     if (mobileDropdown) {
                         mobileDropdown.classList.add('hidden');
+                    }
+                    if (mobileDropdownServicios) {
+                        mobileDropdownServicios.classList.add('hidden');
                     }
                 });
             }
