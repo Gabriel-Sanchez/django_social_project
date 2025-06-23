@@ -6,14 +6,15 @@ Noticias - PROCLADEPAN Fundación
 {% endblock title %}
 
 {% block content %}
-<header class="bg-gradient-to-r from-[rgb(0,103,198)] to-[rgb(51,133,255)] text-white p-8">
-    <div class="container mx-auto text-center">
-        <h1 class="text-4xl font-bold mb-2">Noticias</h1>
-        <p class="text-lg opacity-90">Mantente informado sobre nuestras actividades y logros</p>
-    </div>
-</header>
-
 <main class="container mx-auto py-8 px-4">
+    <!-- Header Section -->
+    <div class="text-center mb-12">
+        <h1 class="text-4xl font-bold text-[rgb(0,103,198)] mb-4">Noticias</h1>
+        <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+            Mantente informado sobre nuestras actividades y logros. Aquí encontrarás las últimas noticias 
+            sobre los proyectos, eventos y avances de PROCLADEPAN en nuestra misión de desarrollo social.
+        </p>
+    </div>
     {% if noticias %}
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {% for noticia in noticias %}
@@ -118,11 +119,7 @@ Noticias - PROCLADEPAN Fundación
     transform: scale(1.05);
 }
 
-/* Variables CSS */
-:root {
-    --theme-blue: rgb(0, 103, 198);
-    --theme-brown: rgb(139, 69, 19);
-}
+/* Variables CSS ya están definidas en base.html */
 </style>
 
 {% endblock content %} 
