@@ -54,6 +54,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'eventsApp.middleware.FileSizeMiddleware',  # Validación de tamaño de archivos
+    'eventsApp.middleware.CKEditorUploadMiddleware',  # Validación específica de CKEditor
 ]
 
 ROOT_URLCONF = 'django_social_project.urls'
@@ -167,7 +169,7 @@ customColorPalette = [
 CKEDITOR_5_CONFIGS = {
     'default': {
         'toolbar': ['heading', '|', 'bold', 'italic', 'link',
-                   'bulletedList', 'numberedList', 'blockQuote', 'imageUpload', ],
+                   'bulletedList', 'numberedList', 'blockQuote', 'imageUpload', 'mediaEmbed', ],
         'heading': {
             'options': [
                 {'model': 'paragraph', 'title': 'Párrafo', 'class': 'ck-heading_paragraph'},
@@ -175,6 +177,28 @@ CKEDITOR_5_CONFIGS = {
                 {'model': 'heading2', 'view': 'h2', 'title': 'Título 2', 'class': 'ck-heading_heading2'},
                 {'model': 'heading3', 'view': 'h3', 'title': 'Título 3', 'class': 'ck-heading_heading3'}
             ]
+        },
+        'image': {
+            'toolbar': ['imageTextAlternative', '|', 'imageStyle:alignLeft',
+                       'imageStyle:alignRight', 'imageStyle:alignCenter', 'imageStyle:side'],
+            'styles': ['full', 'side', 'alignLeft', 'alignRight', 'alignCenter'],
+            'upload': {
+                'types': ['jpeg', 'jpg', 'png', 'gif', 'bmp', 'webp'],
+                'maxFileSize': '2MB'
+            }
+        },
+        'simpleUpload': {
+            'uploadUrl': '/pan/ckeditor/upload/',
+            'withCredentials': True,
+            'headers': {
+                'X-Requested-With': 'XMLHttpRequest',
+            }
+        },
+        'ckfinder': {
+            'uploadUrl': '/pan/ckeditor/upload/'
+        },
+        'mediaEmbed': {
+            'previewsInData': True
         }
     },
     'extends': {
@@ -189,7 +213,7 @@ CKEDITOR_5_CONFIGS = {
                 'code','subscript', 'superscript', 'highlight', '|',
                 'bulletedList', 'numberedList', 'todoList', '|',  'blockQuote', '|',
                 'fontSize', 'fontFamily', 'fontColor', 'fontBackgroundColor', 'removeFormat',
-                '-', 'insertTable', 'alignment', 'link', 'imageUpload', 'undo', 'redo'],
+                '-', 'insertTable', 'alignment', 'link', 'imageUpload', 'mediaEmbed', 'undo', 'redo'],
         'image': {
             'toolbar': ['imageTextAlternative', '|', 'imageStyle:alignLeft',
                        'imageStyle:alignRight', 'imageStyle:alignCenter', 'imageStyle:side',  '|'],
@@ -199,7 +223,24 @@ CKEDITOR_5_CONFIGS = {
                 'alignLeft',
                 'alignRight',
                 'alignCenter',
-            ]
+            ],
+            'upload': {
+                'types': ['jpeg', 'jpg', 'png', 'gif', 'bmp', 'webp'],
+                'maxFileSize': '2MB'
+            }
+        },
+        'simpleUpload': {
+            'uploadUrl': '/pan/ckeditor/upload/',
+            'withCredentials': True,
+            'headers': {
+                'X-Requested-With': 'XMLHttpRequest',
+            }
+        },
+        'ckfinder': {
+            'uploadUrl': '/pan/ckeditor/upload/'
+        },
+        'mediaEmbed': {
+            'previewsInData': True
         },
         'table': {
             'contentToolbar': [ 'tableColumn', 'tableRow', 'mergeTableCells',
@@ -251,6 +292,19 @@ CKEDITOR_5_CONFIGS = {
 CKEDITOR_5_FILE_STORAGE = "django.core.files.storage.FileSystemStorage"
 CKEDITOR_5_UPLOAD_PATH = "uploads/"
 CKEDITOR_5_CUSTOM_CSS = "/static/admin/css/custom_admin.css"  # Ruta a nuestro CSS personalizado
+
+# Límites de archivos para CKEditor 5
+CKEDITOR_5_FILE_UPLOAD_PERMISSION = "staff"  # Solo staff puede subir archivos
+DATA_UPLOAD_MAX_MEMORY_SIZE = 2 * 1024 * 1024  # 2MB máximo en memoria (más estricto)
+FILE_UPLOAD_MAX_MEMORY_SIZE = 2 * 1024 * 1024  # 2MB máximo por archivo (más estricto)
+
+# Configuración personalizada para validación de imágenes
+CKEDITOR_5_ALLOW_ALL_FILE_TYPES = False
+CKEDITOR_5_UPLOAD_FILE_TYPES = ['jpeg', 'jpg', 'png', 'gif', 'bmp', 'webp', 'tiff']
+
+# Límite estricto para subidas de archivos (afecta drag & drop)
+DATA_UPLOAD_MAX_NUMBER_FIELDS = 1000
+DATA_UPLOAD_MAX_NUMBER_FILES = 20
 
 # Configuración de correo electrónico
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'

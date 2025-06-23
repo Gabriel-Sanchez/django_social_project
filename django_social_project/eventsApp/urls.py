@@ -1,5 +1,5 @@
 from django.urls import path
-from . import views
+from . import views, ckeditor_views
 
 urlpatterns = [
     path('inicio/', views.home, name='home'),
@@ -22,5 +22,10 @@ urlpatterns = [
     path('comercio-justo/', views.comercio_justo, name='comercio_justo'),
     path('noticias/', views.noticias, name='noticias'),
     path('noticias/<int:noticia_id>/', views.noticia_detail, name='noticia_detail'),
+    
+    # URLs personalizadas para CKEditor con validación
+    path('ckeditor/upload/', ckeditor_views.ckeditor_upload, name='ckeditor_upload'),
+    path('ckeditor/browse/', ckeditor_views.ckeditor_browse, name='ckeditor_browse'),
+    
     path('', views.home, name='index'),  # Redirige la raíz a inicio
 ]

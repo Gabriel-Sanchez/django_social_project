@@ -1,5 +1,6 @@
 {% extends "base/base.html" %}
 {% load static %}
+{% load content_filters %}
 
 {% block title %}
 {{ noticia.titulo }} - PROCLADEPAN Fundación
@@ -67,7 +68,7 @@
         <!-- Contenido de la noticia -->
         <div class="prose prose-lg max-w-none mb-12">
             <div class="text-gray-800 leading-relaxed">
-                {{ noticia.contenido|safe }}
+                {{ noticia.contenido|safe_content }}
             </div>
         </div>
 
@@ -194,12 +195,117 @@
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
 }
 
+/* Estilos para embeds de YouTube */
+.youtube-embed-container {
+    position: relative;
+    padding-bottom: 56.25%; /* Aspecto 16:9 */
+    height: 0;
+    overflow: hidden;
+    max-width: 100%;
+    margin: 1.5em 0;
+    border-radius: 0.5em;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.youtube-embed-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 0.5em;
+}
+
+/* Estilos para iframes generales */
+.prose iframe {
+    margin: 1.5em 0;
+    border-radius: 0.5em;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    max-width: 100%;
+}
+
+/* Estilos para tablas del contenido */
+.content-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5em 0;
+    background-color: white;
+    border-radius: 0.5em;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.content-table th,
+.content-table td {
+    padding: 0.75em;
+    text-align: left;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.content-table th {
+    background-color: var(--theme-blue);
+    color: white;
+    font-weight: 600;
+}
+
+.content-table tr:hover {
+    background-color: #f9fafb;
+}
+
+/* Estilos mejorados para blockquotes */
+.content-blockquote {
+    border-left: 4px solid var(--theme-blue);
+    padding: 1.5em;
+    margin: 1.5em 0;
+    background: linear-gradient(135deg, #f9fafb 0%, #f3f4f6 100%);
+    border-radius: 0.5em;
+    font-style: italic;
+    position: relative;
+}
+
+.content-blockquote::before {
+    content: '"';
+    font-size: 4em;
+    color: var(--theme-blue);
+    opacity: 0.3;
+    position: absolute;
+    top: -0.5em;
+    left: 0.5em;
+    font-family: serif;
+}
+
+/* Estilos para imágenes del contenido */
+.content-image {
+    margin: 1.5em auto;
+    border-radius: 0.5em;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
 /* Estilo para líneas limitadas */
 .line-clamp-2 {
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
+}
+
+/* Responsividad para embeds */
+@media (max-width: 768px) {
+    .youtube-embed-container {
+        margin: 1em 0;
+    }
+    
+    .content-table {
+        font-size: 0.875em;
+    }
+    
+    .content-table th,
+    .content-table td {
+        padding: 0.5em;
+    }
 }
 
 /* Variables CSS ya están definidas en base.html */
