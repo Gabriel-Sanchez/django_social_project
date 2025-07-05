@@ -112,7 +112,7 @@ background: linear-gradient(
             rgba(255, 255, 255, 0) 0%, 
             rgb(250, 250, 245) 100%
           ),
-          url('../../../media/assets/pan_fondo.png');
+          url('https://pub-e0843711b8494a68b8b33ffd5308a0e5.r2.dev/pan_fondo.png');
 height: 320px;
 background-repeat: no-repeat;
 background-size: cover;
