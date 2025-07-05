@@ -188,14 +188,14 @@ CKEDITOR_5_CONFIGS = {
             }
         },
         'simpleUpload': {
-            'uploadUrl': '/pan/ckeditor/upload/',
+            'uploadUrl': '/ckeditor/upload/',
             'withCredentials': True,
             'headers': {
                 'X-Requested-With': 'XMLHttpRequest',
             }
         },
         'ckfinder': {
-            'uploadUrl': '/pan/ckeditor/upload/'
+            'uploadUrl': '/ckeditor/upload/'
         },
         'mediaEmbed': {
             'previewsInData': True
@@ -230,14 +230,14 @@ CKEDITOR_5_CONFIGS = {
             }
         },
         'simpleUpload': {
-            'uploadUrl': '/pan/ckeditor/upload/',
+            'uploadUrl': '/ckeditor/upload/',
             'withCredentials': True,
             'headers': {
                 'X-Requested-With': 'XMLHttpRequest',
             }
         },
         'ckfinder': {
-            'uploadUrl': '/pan/ckeditor/upload/'
+            'uploadUrl': '/ckeditor/upload/'
         },
         'mediaEmbed': {
             'previewsInData': True

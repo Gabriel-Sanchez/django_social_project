@@ -2,7 +2,7 @@ from django.urls import path
 from . import views, ckeditor_views
 
 urlpatterns = [
-    path('inicio/', views.home, name='home'),
+    path('inicio/', views.home, name='inicio'),
     path('eventos/', views.events, name='events'),
     path('eventos/<int:event_id>/', views.event_detail, name='event_detail'),
     path('eventos/calendario/', views.calendar_events, name='calendar_events'),
